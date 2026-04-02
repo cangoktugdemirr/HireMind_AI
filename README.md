@@ -50,7 +50,7 @@ HireMind AI, geleneksel işe alım süreçlerindeki subjektifliği ve verimsizli
 ### 1. Repoyu klonla
 
 ```bash
-git clone https://github.com/KULLANICI_ADIN/HireMind_AI.git
+git clone https://github.com/cangoktugdemirr/HireMind_AI.git
 cd HireMind_AI
 ```
 
