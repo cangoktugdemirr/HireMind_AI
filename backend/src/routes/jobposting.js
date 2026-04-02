@@ -1,0 +1,150 @@
+const express = require('express');
+const { auth, requireRole } = require('../middleware/auth');
+const JobPosting = require('../models/JobPosting');
+const CV = require('../models/CV');
+const Interview = require('../models/Interview');
+const User = require('../models/User');
+const { matchCandidateToJob, generateInterviewQuestions } = require('../services/ai.service');
+
+const router = express.Router();
+
+// Arka planda çalışan eşleştirme fonksiyonu
+const matchCandidatesForJob = async (jobPosting) => {
+  try {
+    const availableCVs = await CV.find({ isMatched: false });
+    console.log(`Eşleştirme başladı: ${availableCVs.length} aday kontrol ediliyor...`);
+
+    for (const cv of availableCVs) {
+      try {
+        const { score } = await matchCandidateToJob(cv, jobPosting);
+        console.log(`Aday ${cv.userId} - Puan: ${score}`);
+
+        if (score >= 50) {
+          cv.isMatched = true;
+          cv.matchedJobId = jobPosting._id;
+          await cv.save();
+
+          const { questions } = await generateInterviewQuestions(jobPosting, cv);
+
+          const interview = await Interview.create({
+            candidateId: cv.userId,
+            jobPostingId: jobPosting._id,
+            questions,
+            answers: []
+          });
+
+          jobPosting.matchedCandidates.push({
+            candidateId: cv.userId,
+            cvId: cv._id,
+            matchScore: score,
+            status: 'pending'
+          });
+
+          console.log(`Aday eşleşti: ${cv.userId}, mülakat oluşturuldu: ${interview._id}`);
+        }
+      } catch (err) {
+        console.error(`Aday ${cv.userId} eşleştirme hatası:`, err.message);
+      }
+    }
+
+    await jobPosting.save();
+    console.log('Eşleştirme tamamlandı.');
+  } catch (err) {
+    console.error('matchCandidatesForJob genel hatası:', err);
+  }
+};
+
+// POST /api/jobpostings — İlan oluştur
+router.post('/', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const { title, description, requiredSkills } = req.body;
+
+    if (!title || !description || !requiredSkills) {
+      return res.status(400).json({ message: 'Tüm alanlar zorunludur' });
+    }
+
+    const jobPosting = await JobPosting.create({
+      hrUserId: req.user.id,
+      title,
+      description,
+      requiredSkills,
+      matchedCandidates: []
+    });
+
+    // Eşleştirmeyi async başlat, HTTP yanıtını bekleme
+    matchCandidatesForJob(jobPosting);
+
+    res.status(201).json({ jobPostingId: jobPosting._id });
+  } catch (err) {
+    console.error('İlan oluşturma hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+// GET /api/jobpostings — HR'ın ilanlarını listele
+router.get('/', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const postings = await JobPosting.find({ hrUserId: req.user.id }).sort({ createdAt: -1 });
+
+    const result = postings.map((p) => ({
+      _id: p._id,
+      title: p.title,
+      requiredSkills: p.requiredSkills,
+      totalCandidates: p.matchedCandidates.length,
+      completedCount: p.matchedCandidates.filter((c) => c.status === 'completed').length,
+      createdAt: p.createdAt
+    }));
+
+    res.json({ jobPostings: result });
+  } catch (err) {
+    console.error('İlan listeleme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+// GET /api/jobpostings/:id — İlan detayı + aday listesi
+router.get('/:id', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const posting = await JobPosting.findOne({ _id: req.params.id, hrUserId: req.user.id });
+    if (!posting) {
+      return res.status(404).json({ message: 'İlan bulunamadı' });
+    }
+
+    // Her aday için kullanıcı adını ve mülakat bilgisini getir
+    const candidatesWithDetails = await Promise.all(
+      posting.matchedCandidates.map(async (mc) => {
+        const [user, cv, interview] = await Promise.all([
+          User.findById(mc.candidateId).select('name'),
+          CV.findById(mc.cvId).select('educationLevel experienceLevel skills'),
+          Interview.findOne({ candidateId: mc.candidateId, jobPostingId: posting._id }).select('_id status')
+        ]);
+        return {
+          candidateId: mc.candidateId,
+          name: user ? user.name : 'Bilinmiyor',
+          educationLevel: cv ? cv.educationLevel : '',
+          experienceLevel: cv ? cv.experienceLevel : '',
+          skills: cv ? cv.skills : '',
+          matchScore: mc.matchScore,
+          status: mc.status,
+          interviewId: interview ? interview._id : null
+        };
+      })
+    );
+
+    res.json({
+      jobPosting: {
+        _id: posting._id,
+        title: posting.title,
+        description: posting.description,
+        requiredSkills: posting.requiredSkills,
+        createdAt: posting.createdAt,
+        candidates: candidatesWithDetails
+      }
+    });
+  } catch (err) {
+    console.error('İlan detay hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+module.exports = router;

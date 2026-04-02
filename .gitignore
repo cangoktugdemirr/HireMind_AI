@@ -1,0 +1,28 @@
+# Bağımlılıklar
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Ortam değişkenleri (GİZLİ - asla yükleme!)
+backend/.env
+.env
+*.env
+
+# Ekran tasarımları (büyük dosyalar, gerek yok)
+Ekran_Tasarımları/
+
+# Build çıktıları
+frontend/dist/
+frontend/build/
+
+# Log dosyaları
+*.log
+npm-debug.log*
+
+# OS dosyaları
+.DS_Store
+Thumbs.db
+
+# IDE dosyaları
+.vscode/
+.idea/

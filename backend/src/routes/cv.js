@@ -1,0 +1,40 @@
+const express = require('express');
+const { auth, requireRole } = require('../middleware/auth');
+const CV = require('../models/CV');
+
+const router = express.Router();
+
+// POST /api/cv — CV oluştur veya güncelle (upsert)
+router.post('/', auth, requireRole('candidate'), async (req, res) => {
+  try {
+    const { fullName, email, phone, educationLevel, schoolDepartment, experienceLevel, lastPosition, skills, about } = req.body;
+
+    if (!fullName || !email || !phone || !educationLevel || !schoolDepartment || !experienceLevel || !skills) {
+      return res.status(400).json({ message: 'Zorunlu alanlar eksik' });
+    }
+
+    const cv = await CV.findOneAndUpdate(
+      { userId: req.user.id },
+      { userId: req.user.id, fullName, email, phone, educationLevel, schoolDepartment, experienceLevel, lastPosition, skills, about },
+      { upsert: true, new: true, runValidators: true }
+    );
+
+    res.json({ message: 'CV kaydedildi', cv });
+  } catch (err) {
+    console.error('CV kayıt hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+// GET /api/cv/me — Adayın CV'sini getir
+router.get('/me', auth, requireRole('candidate'), async (req, res) => {
+  try {
+    const cv = await CV.findOne({ userId: req.user.id });
+    res.json({ cv: cv || null });
+  } catch (err) {
+    console.error('CV getirme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+module.exports = router;
