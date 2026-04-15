@@ -1,12 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased transition-colors duration-300;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main) !important;
+    color: var(--text-primary) !important;
+  }
 }
 
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
+/* --- THEME INDEPENDENT DESIGN SYSTEM --- */
+/* Everything uses variables. Switching the 'dark' class on <html> only changes the variables. */
+
+:root {
+  --bg-main: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-header: rgba(255, 255, 255, 0.9);
+  --card-bg: #ffffff;
+  --card-hover-bg: #ffffff;
+  --card-border: rgba(226, 232, 240, 0.8);
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --accent-blue: #3b82f6;
+  --stat-card-gradient: transparent;
+}
+
+.dark {
+  --bg-main: #060910;
+  --bg-sidebar: #0a0e1a;
+  --bg-header: rgba(10, 14, 26, 0.9);
+  --card-bg: rgba(30, 41, 59, 0.4);
+  --card-hover-bg: rgba(30, 41, 59, 0.6);
+  --card-border: rgba(51, 65, 85, 0.4);
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --accent-blue: #60a5fa;
+  --stat-card-gradient: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+}
+
+/* Base Component Styles */
+
+.glass-panel {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border) !important;
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+  color: var(--text-primary);
+}
+
+.stat-card {
+  background: var(--stat-card-gradient), var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  background: var(--stat-card-gradient), var(--card-hover-bg) !important;
+  box-shadow: 0 15px 35px -8px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-blue) !important;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Background Blobs for Landing/Dashboards */
+.blob {
+  position: absolute;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.2;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: float_anim 15s infinite ease-in-out;
+}
+
+@keyframes float_anim {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
 }

@@ -15,8 +15,8 @@ export default function CreateJobPostingPage() {
   const [resultJobId, setResultJobId] = useState(null);
   const navigate = useNavigate();
 
-  const inputClass = 'w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500';
-  const labelClass = 'block text-sm font-medium text-gray-700 mb-1.5';
+  const inputClass = 'w-full px-4 py-3 text-sm bg-white dark:bg-slate-800/50 text-gray-900 dark:text-slate-100 border border-gray-200 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-gray-400 dark:placeholder:text-slate-600';
+  const labelClass = 'block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function CreateJobPostingPage() {
         {error && <Alert variant="error" className="mb-4">{error}</Alert>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+          <div className="glass-panel p-6 space-y-4">
             <div>
               <label className={labelClass}>Pozisyon Başlığı <span className="text-red-500">*</span></label>
               <input
@@ -72,7 +72,7 @@ export default function CreateJobPostingPage() {
                 className={inputClass}
                 placeholder="React, TypeScript, Node.js, ..."
               />
-              <p className="text-xs text-gray-400 mt-1">Virgülle ayırarak yazınız</p>
+              <p className="text-xs text-gray-400 dark:text-slate-500 mt-1.5">Virgülle ayırarak yazınız</p>
             </div>
           </div>
 
@@ -90,14 +90,14 @@ export default function CreateJobPostingPage() {
       {/* İlan Oluşturma Sonucu Modalı */}
       <Modal isOpen={resultModal} onClose={() => {}} title="">
         <div className="flex flex-col items-center text-center py-4">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
-            <CheckCircle className="w-9 h-9 text-green-600" />
+          <div className="w-16 h-16 bg-green-100 dark:bg-green-500/20 rounded-2xl flex items-center justify-center mb-4">
+            <CheckCircle className="w-9 h-9 text-green-600 dark:text-green-400" />
           </div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">İlan Oluşturuldu!</h2>
-          <p className="text-sm text-gray-500 mb-2">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-2">İlan Oluşturuldu!</h2>
+          <p className="text-sm text-gray-500 dark:text-slate-400 mb-2">
             İlanınız başarıyla yayınlandı.
           </p>
-          <div className="flex items-center gap-2 text-sm text-primary-600 mb-6">
+          <div className="flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 mb-6">
             <Loader className="w-4 h-4 animate-spin" />
             Yapay zeka uygun adayları eşleştiriyor...
           </div>

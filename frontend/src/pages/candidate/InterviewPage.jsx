@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Brain, ChevronLeft, ChevronRight, AlertCircle, Send, LogOut } from 'lucide-react';
+import { ChevronLeft, ChevronRight, AlertCircle, Send, LogOut } from 'lucide-react';
 import Spinner from '../../components/ui/Spinner';
 import Modal from '../../components/ui/Modal';
 import Button from '../../components/ui/Button';
@@ -74,7 +74,7 @@ export default function InterviewPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center transition-colors">
         <Spinner size="lg" />
       </div>
     );
@@ -82,7 +82,7 @@ export default function InterviewPage() {
 
   if (error && !interview) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex items-center justify-center p-4 transition-colors">
         <Alert variant="error">{error}</Alert>
       </div>
     );
@@ -93,23 +93,23 @@ export default function InterviewPage() {
   const progress = Math.round((answeredCount / questions.length) * 100);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 flex flex-col transition-colors">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+      <header className="bg-white dark:bg-slate-900/80 dark:backdrop-blur-md border-b border-gray-200 dark:border-slate-700/50 px-6 py-4 flex items-center justify-between transition-colors">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
-            <Brain className="w-5 h-5 text-white" />
+          <div className="w-10 h-10 flex items-center justify-center">
+            <img src="/logo.svg" alt="HireMind" className="w-6 h-6 object-contain" />
           </div>
           <div>
-            <h1 className="text-sm font-semibold text-gray-900">HireMind AI Mülakat</h1>
-            <p className="text-xs text-gray-500">{interview?.jobPostingId?.title || 'Mülakat'}</p>
+            <h1 className="text-sm font-bold text-gray-900 dark:text-white">HireMind Mülakat</h1>
+            <p className="text-xs text-gray-500 dark:text-slate-400">{interview?.jobPostingId?.title || 'Mülakat'}</p>
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-500">{answeredCount}/{questions.length} yanıtlandı</span>
+          <span className="text-sm text-gray-500 dark:text-slate-400 font-medium">{answeredCount}/{questions.length} yanıtlandı</span>
           <button
             onClick={() => setAbandonModal(true)}
-            className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-700 transition-colors"
+            className="flex items-center gap-1.5 text-sm text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 transition-colors"
           >
             <LogOut className="w-4 h-4" />
             Çıkış
@@ -118,8 +118,8 @@ export default function InterviewPage() {
       </header>
 
       {/* Progress bar */}
-      <div className="h-1 bg-gray-200">
-        <div className="h-full bg-primary-600 transition-all duration-300" style={{ width: `${progress}%` }} />
+      <div className="h-1.5 bg-gray-200 dark:bg-slate-800">
+        <div className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 transition-all duration-500 rounded-r-full" style={{ width: `${progress}%` }} />
       </div>
 
       {error && (
@@ -131,19 +131,19 @@ export default function InterviewPage() {
       <div className="flex flex-1 max-w-6xl mx-auto w-full px-6 py-6 gap-6">
         {/* Ana içerik */}
         <div className="flex-1 flex flex-col">
-          <div className="bg-white rounded-xl border border-gray-200 p-6 flex-1 flex flex-col">
+          <div className="glass-panel p-6 flex-1 flex flex-col">
             {/* Soru numarası ve kategori */}
-            <div className="flex items-center gap-2 mb-4">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary-100 text-primary-700 text-sm font-semibold">
+            <div className="flex items-center gap-3 mb-5">
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-bold border border-blue-500/20">
                 {currentIdx + 1}
               </span>
-              <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+              <span className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">
                 {currentIdx < 7 ? 'Teknik Soru' : 'Davranışsal Soru'}
               </span>
             </div>
 
             {/* Soru metni */}
-            <p className="text-base font-medium text-gray-900 mb-6 leading-relaxed">
+            <p className="text-base font-semibold text-gray-900 dark:text-white mb-6 leading-relaxed">
               {questions[currentIdx]}
             </p>
 
@@ -153,14 +153,14 @@ export default function InterviewPage() {
                 value={answers[currentIdx] || ''}
                 onChange={(e) => handleAnswerChange(e.target.value)}
                 rows={8}
-                className="flex-1 w-full px-4 py-3 text-sm border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="flex-1 w-full px-4 py-3 text-sm bg-white dark:bg-slate-800/50 text-gray-900 dark:text-slate-100 border border-gray-200 dark:border-slate-700/50 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-gray-400 dark:placeholder:text-slate-600"
                 placeholder="Yanıtınızı buraya yazın..."
               />
-              <p className="text-xs text-gray-400 mt-1 text-right">{(answers[currentIdx] || '').length} karakter</p>
+              <p className="text-xs text-gray-400 dark:text-slate-500 mt-1.5 text-right">{(answers[currentIdx] || '').length} karakter</p>
             </div>
 
             {/* Navigasyon */}
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100 dark:border-slate-700/50">
               <Button
                 variant="secondary"
                 onClick={() => setCurrentIdx((i) => i - 1)}
@@ -184,8 +184,8 @@ export default function InterviewPage() {
 
         {/* Soru navigatörü (sağ panel) */}
         <div className="w-56 flex-shrink-0">
-          <div className="bg-white rounded-xl border border-gray-200 p-4 sticky top-6">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Sorular</h3>
+          <div className="glass-panel p-4 sticky top-6">
+            <h3 className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider mb-3">Sorular</h3>
             <div className="grid grid-cols-5 gap-2">
               {questions.map((_, idx) => {
                 const isAnswered = answers[idx]?.trim().length > 0;
@@ -194,12 +194,12 @@ export default function InterviewPage() {
                   <button
                     key={idx}
                     onClick={() => setCurrentIdx(idx)}
-                    className={`w-9 h-9 rounded-lg text-xs font-semibold transition-colors ${
+                    className={`w-9 h-9 rounded-lg text-xs font-bold transition-all ${
                       isActive
-                        ? 'bg-primary-600 text-white'
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/30'
                         : isAnswered
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
+                        ? 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/30'
+                        : 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-slate-500 hover:bg-gray-200 dark:hover:bg-slate-700 border border-transparent'
                     }`}
                   >
                     {idx + 1}
@@ -207,18 +207,18 @@ export default function InterviewPage() {
                 );
               })}
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-100 space-y-2 text-xs">
+            <div className="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700/50 space-y-2 text-xs">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-primary-600" />
-                <span className="text-gray-500">Aktif</span>
+                <div className="w-3 h-3 rounded bg-blue-600" />
+                <span className="text-gray-500 dark:text-slate-400">Aktif</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-green-100" />
-                <span className="text-gray-500">Yanıtlandı</span>
+                <div className="w-3 h-3 rounded bg-green-100 dark:bg-green-500/20 border border-green-200 dark:border-green-500/30" />
+                <span className="text-gray-500 dark:text-slate-400">Yanıtlandı</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-gray-100" />
-                <span className="text-gray-500">Bekliyor</span>
+                <div className="w-3 h-3 rounded bg-gray-100 dark:bg-slate-800" />
+                <span className="text-gray-500 dark:text-slate-400">Bekliyor</span>
               </div>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function InterviewPage() {
       {/* Mülakatı Gönder Modalı */}
       <Modal isOpen={submitModal} onClose={() => setSubmitModal(false)} title="Mülakatı Tamamla">
         <div className="space-y-4">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-slate-300">
             Mülakatı tamamlamak üzeresiniz. Gönderildikten sonra yanıtlarınız değiştirilemez.
           </p>
           {answeredCount < questions.length && (

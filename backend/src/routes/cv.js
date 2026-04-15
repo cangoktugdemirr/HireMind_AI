@@ -37,4 +37,18 @@ router.get('/me', auth, requireRole('candidate'), async (req, res) => {
   }
 });
 
+// GET /api/cv/:id — HR adayın CV'sini getirir
+router.get('/:id', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const cv = await CV.findOne({ userId: req.params.id });
+    if (!cv) {
+      return res.status(404).json({ message: 'CV bulunamadı' });
+    }
+    res.json({ cv });
+  } catch (err) {
+    console.error('CV getirme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
 module.exports = router;

@@ -147,4 +147,52 @@ router.get('/:id', auth, requireRole('hr'), async (req, res) => {
   }
 });
 
+// PUT /api/jobpostings/:id — İlan güncelle
+router.put('/:id', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const { title, description, requiredSkills } = req.body;
+    const posting = await JobPosting.findOneAndUpdate(
+      { _id: req.params.id, hrUserId: req.user.id },
+      { title, description, requiredSkills },
+      { new: true }
+    );
+    if (!posting) return res.status(404).json({ message: 'İlan bulunamadı' });
+    res.json(posting);
+  } catch (err) {
+    console.error('İlan güncelleme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+// DELETE /api/jobpostings/:id — İlan sil
+router.delete('/:id', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const posting = await JobPosting.findOneAndDelete({ _id: req.params.id, hrUserId: req.user.id });
+    if (!posting) return res.status(404).json({ message: 'İlan bulunamadı' });
+    res.json({ message: 'İlan silindi' });
+  } catch (err) {
+    console.error('İlan silme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
+// PATCH /api/jobpostings/:id/candidate — Aday durumu güncelle
+router.patch('/:id/candidate', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const { candidateId, status } = req.body;
+    const posting = await JobPosting.findOne({ _id: req.params.id, hrUserId: req.user.id });
+    if (!posting) return res.status(404).json({ message: 'İlan bulunamadı' });
+
+    const candidateIndex = posting.matchedCandidates.findIndex(c => c.candidateId.toString() === candidateId);
+    if (candidateIndex === -1) return res.status(404).json({ message: 'Aday bulunamadı' });
+
+    posting.matchedCandidates[candidateIndex].status = status;
+    await posting.save();
+    res.json({ message: 'Aday durumu güncellendi' });
+  } catch (err) {
+    console.error('Durum güncelleme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
 module.exports = router;

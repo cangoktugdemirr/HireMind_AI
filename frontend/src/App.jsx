@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
+import HRLoginPage from './pages/HRLoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CandidateDashboard from './pages/candidate/CandidateDashboard';
 import CVFormPage from './pages/candidate/CVFormPage';
@@ -11,6 +14,9 @@ import HRDashboard from './pages/hr/HRDashboard';
 import CreateJobPostingPage from './pages/hr/CreateJobPostingPage';
 import JobPostingDetailPage from './pages/hr/JobPostingDetailPage';
 import CandidateReportPage from './pages/hr/CandidateReportPage';
+import FakeAdminPage from './pages/FakeAdminPage';
+import PrivacyPage from './pages/PrivacyPage';
+import TermsPage from './pages/TermsPage';
 
 const ProtectedRoute = ({ children, role }) => {
   const { isAuthenticated, user, loading } = useAuth();
@@ -31,9 +37,13 @@ const RootRedirect = () => {
 
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<RootRedirect />} />
+    <Route path="/" element={<LandingPage />} />
     <Route path="/login" element={<LoginPage />} />
+    <Route path="/hr-login" element={<HRLoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
+    <Route path="/admin" element={<FakeAdminPage />} />
+    <Route path="/privacy" element={<PrivacyPage />} />
+    <Route path="/terms" element={<TermsPage />} />
 
     <Route path="/candidate/dashboard" element={
       <ProtectedRoute role="candidate"><CandidateDashboard /></ProtectedRoute>
@@ -64,10 +74,12 @@ const AppRoutes = () => (
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <AppRoutes />
-      </AuthProvider>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

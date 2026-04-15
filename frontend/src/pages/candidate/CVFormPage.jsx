@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import DashboardLayout from '../../components/layout/DashboardLayout';
+import { User, GraduationCap, Briefcase, Sparkles } from 'lucide-react';
+import PortalLayout from '../../components/layout/PortalLayout';
 import Button from '../../components/ui/Button';
 import Alert from '../../components/ui/Alert';
 import Spinner from '../../components/ui/Spinner';
@@ -63,27 +64,32 @@ export default function CVFormPage() {
     }
   };
 
-  const inputClass = 'w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500';
-  const labelClass = 'block text-sm font-medium text-gray-700 mb-1.5';
+  const inputClass = 'w-full px-4 py-3 text-sm bg-white dark:bg-slate-800/50 text-gray-900 dark:text-slate-100 border border-gray-200 dark:border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-gray-400 dark:placeholder:text-slate-600';
+  const labelClass = 'block text-sm font-semibold text-gray-700 dark:text-slate-300 mb-2';
 
   if (fetchLoading) {
     return (
-      <DashboardLayout title="Özgeçmişim">
+      <PortalLayout title="Özgeçmişim">
         <div className="flex items-center justify-center h-64"><Spinner size="lg" /></div>
-      </DashboardLayout>
+      </PortalLayout>
     );
   }
 
   return (
-    <DashboardLayout title="Özgeçmişim">
+    <PortalLayout title="Özgeçmişim">
       <div className="max-w-2xl">
         {error && <Alert variant="error" className="mb-4">{error}</Alert>}
         {success && <Alert variant="success" className="mb-4">{success}</Alert>}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Kişisel Bilgiler */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-base font-semibold text-gray-900 mb-4">Kişisel Bilgiler</h2>
+          <div className="glass-panel p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-blue-500/10 dark:bg-blue-500/20 flex items-center justify-center border border-blue-500/20">
+                <User className="w-5 h-5 text-blue-500 dark:text-blue-400" />
+              </div>
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">Kişisel Bilgiler</h2>
+            </div>
             <div className="grid grid-cols-1 gap-4">
               <div>
                 <label className={labelClass}>Ad Soyad <span className="text-red-500">*</span></label>
@@ -101,8 +107,13 @@ export default function CVFormPage() {
           </div>
 
           {/* Eğitim */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-base font-semibold text-gray-900 mb-4">Eğitim</h2>
+          <div className="glass-panel p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/10 dark:bg-purple-500/20 flex items-center justify-center border border-purple-500/20">
+                <GraduationCap className="w-5 h-5 text-purple-500 dark:text-purple-400" />
+              </div>
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">Eğitim</h2>
+            </div>
             <div className="grid grid-cols-1 gap-4">
               <div>
                 <label className={labelClass}>Eğitim Seviyesi <span className="text-red-500">*</span></label>
@@ -119,8 +130,13 @@ export default function CVFormPage() {
           </div>
 
           {/* Deneyim */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-base font-semibold text-gray-900 mb-4">Deneyim</h2>
+          <div className="glass-panel p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-green-500/10 dark:bg-green-500/20 flex items-center justify-center border border-green-500/20">
+                <Briefcase className="w-5 h-5 text-green-500 dark:text-green-400" />
+              </div>
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">Deneyim</h2>
+            </div>
             <div className="grid grid-cols-1 gap-4">
               <div>
                 <label className={labelClass}>Toplam Deneyim <span className="text-red-500">*</span></label>
@@ -137,13 +153,18 @@ export default function CVFormPage() {
           </div>
 
           {/* Beceriler ve Hakkımda */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-base font-semibold text-gray-900 mb-4">Beceriler ve Hakkımda</h2>
+          <div className="glass-panel p-6">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-10 h-10 rounded-xl bg-cyan-500/10 dark:bg-cyan-500/20 flex items-center justify-center border border-cyan-500/20">
+                <Sparkles className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
+              </div>
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">Beceriler ve Hakkımda</h2>
+            </div>
             <div className="grid grid-cols-1 gap-4">
               <div>
                 <label className={labelClass}>Beceriler <span className="text-red-500">*</span></label>
                 <input type="text" value={form.skills} onChange={(e) => setForm({ ...form, skills: e.target.value })} required className={inputClass} placeholder="React, Node.js, TypeScript, ..." />
-                <p className="text-xs text-gray-400 mt-1">Virgülle ayırarak yazınız</p>
+                <p className="text-xs text-gray-400 dark:text-slate-500 mt-1.5">Virgülle ayırarak yazınız</p>
               </div>
               <div>
                 <label className={labelClass}>Hakkımda</label>
@@ -154,7 +175,7 @@ export default function CVFormPage() {
                   className={inputClass}
                   placeholder="Kendinizi kısaca tanıtın..."
                 />
-                <p className="text-xs text-gray-400 mt-1 text-right">{form.about.length}/500</p>
+                <p className="text-xs text-gray-400 dark:text-slate-500 mt-1.5 text-right">{form.about.length}/500</p>
               </div>
             </div>
           </div>
@@ -169,6 +190,6 @@ export default function CVFormPage() {
           </div>
         </form>
       </div>
-    </DashboardLayout>
+    </PortalLayout>
   );
 }

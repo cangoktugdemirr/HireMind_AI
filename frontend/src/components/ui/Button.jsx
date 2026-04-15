@@ -2,8 +2,8 @@ import React from 'react';
 import Spinner from './Spinner';
 
 const variants = {
-  primary: 'bg-primary-600 hover:bg-primary-700 text-white border-transparent',
-  secondary: 'bg-white hover:bg-gray-50 text-gray-700 border-gray-300',
+  primary: 'bg-blue-600 hover:bg-blue-500 text-white border-transparent shadow-sm',
+  secondary: 'bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-200 border-gray-300 dark:border-slate-600',
   danger: 'bg-red-600 hover:bg-red-700 text-white border-transparent'
 };
 
@@ -29,8 +29,8 @@ export default function Button({
       onClick={onClick}
       disabled={disabled || loading}
       className={`
-        inline-flex items-center justify-center gap-2 font-medium rounded-lg border
-        transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+        inline-flex items-center justify-center gap-2 font-medium rounded-xl border
+        transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 dark:focus:ring-offset-slate-900
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variants[variant]} ${sizes[size]} ${className}
       `}

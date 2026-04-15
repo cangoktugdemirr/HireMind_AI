@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Brain } from 'lucide-react';
+import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios';
-import Button from '../components/ui/Button';
 import Alert from '../components/ui/Alert';
 
 export default function LoginPage() {
@@ -20,8 +19,13 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const { data } = await api.post('/auth/login', form);
+      if (data.user.role !== 'candidate') {
+        setError('Lütfen kurum personeli için ayrılmış giriş panelini kullanın.');
+        setLoading(false);
+        return;
+      }
       login(data.token, data.user);
-      navigate(data.user.role === 'hr' ? '/hr/dashboard' : '/candidate/dashboard');
+      navigate('/candidate/dashboard');
     } catch (err) {
       setError(err.response?.data?.message || 'Giriş yapılamadı');
     } finally {
@@ -29,65 +33,80 @@ export default function LoginPage() {
     }
   };
 
+  const inputClass = "w-full px-4 py-3 bg-slate-900/50 text-slate-100 border border-slate-700/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all placeholder:text-slate-600";
+
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-200 w-full max-w-md p-8">
-        {/* Logo */}
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 relative overflow-hidden font-sans">
+      <div className="blob bg-blue-500/20 w-96 h-96 -top-10 -left-10 md:w-[600px] md:h-[600px]"></div>
+      <div className="blob bg-purple-500/20 w-96 h-96 bottom-0 right-0 md:w-[600px] md:h-[600px]" style={{ animationDelay: '2s' }}></div>
+
+      <div className="glass-panel w-full max-w-md p-8 relative z-10">
         <div className="flex flex-col items-center mb-8">
-          <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center mb-3">
-            <Brain className="w-7 h-7 text-white" />
+          <div className="w-16 h-16 flex items-center justify-center mb-4">
+            <img src="/logo.svg" alt="HireMind Logo" className="w-16 h-16 object-contain drop-shadow-xl" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">HireMind AI</h1>
-          <p className="text-gray-500 text-sm mt-1">Hesabınıza giriş yapın</p>
+          <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 tracking-tight">HireMind</h1>
+          <p className="text-slate-400 text-sm mt-3 font-medium px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full flex items-center gap-2">
+            <LogIn className="w-4 h-4 text-blue-400" /> Aday Giriş Portalı
+          </p>
         </div>
 
         {error && <Alert variant="error" className="mb-4">{error}</Alert>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">E-posta</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1.5">E-posta</label>
             <input
               type="email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
-              className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className={inputClass}
               placeholder="ornek@email.com"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Şifre</label>
+            <label className="block text-sm font-medium text-slate-300 mb-1.5">Şifre</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 required
-                className="w-full px-3 py-2.5 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 pr-10"
+                className={`${inputClass} pr-12`}
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
             </div>
           </div>
 
-          <Button type="submit" loading={loading} className="w-full mt-2">
-            Giriş Yap
-          </Button>
+          <button type="submit" disabled={loading} className="w-full mt-4 bg-blue-600 hover:bg-blue-500 text-white py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/25">
+            {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+          </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-6">
+        <p className="text-center text-sm text-slate-400 mt-8 mb-4">
           Hesabınız yok mu?{' '}
-          <Link to="/register" className="text-primary-600 font-medium hover:underline">
-            Kayıt Ol
+          <Link to="/register" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors">
+            Hemen Aday Kaydı Oluştur
           </Link>
         </p>
+        
+        <div className="border-t border-slate-800 pt-5">
+            <p className="text-center text-xs text-slate-500">
+                İK Personeli misiniz?{' '}
+                <Link to="/hr-login" className="text-amber-400 font-medium hover:text-amber-300 hover:underline transition-all">
+                    Kurumsal Giriş Yapın
+                </Link>
+            </p>
+        </div>
       </div>
     </div>
   );

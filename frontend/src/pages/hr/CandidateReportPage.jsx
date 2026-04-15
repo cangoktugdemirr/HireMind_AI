@@ -28,7 +28,7 @@ const CircularScore = ({ score, label }) => {
           {score}
         </text>
       </svg>
-      <span className="text-xs font-medium text-gray-600 text-center">{label}</span>
+      <span className="text-xs font-medium text-gray-600 dark:text-slate-400 text-center">{label}</span>
     </div>
   );
 };
@@ -87,8 +87,8 @@ export default function CandidateReportPage() {
       <DashboardLayout title="Aday Raporu">
         <div className="max-w-xl mx-auto mt-16 flex flex-col items-center text-center gap-4">
           <Spinner size="lg" />
-          <p className="text-base font-medium text-gray-900">Rapor hazırlanıyor...</p>
-          <p className="text-sm text-gray-500">Yapay zeka mülakat yanıtlarını analiz ediyor. Bu birkaç dakika sürebilir.</p>
+          <p className="text-base font-medium text-gray-900 dark:text-white">Rapor hazırlanıyor...</p>
+          <p className="text-sm text-gray-500 dark:text-slate-400">Yapay zeka mülakat yanıtlarını analiz ediyor. Bu birkaç dakika sürebilir.</p>
         </div>
       </DashboardLayout>
     );
@@ -100,20 +100,20 @@ export default function CandidateReportPage() {
         {/* Geri butonu */}
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors mb-2"
+          className="flex items-center gap-1.5 text-sm text-gray-500 dark:text-slate-400 hover:text-gray-700 dark:hover:text-slate-200 transition-colors mb-2"
         >
           <ChevronLeft className="w-4 h-4" /> Geri
         </button>
 
         {/* Aday bilgi kartı */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
+        <div className="glass-panel p-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-full bg-primary-600 flex items-center justify-center text-white text-lg font-semibold">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-lg font-bold shadow">
               {report.candidateName?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <h2 className="text-base font-semibold text-gray-900">{report.candidateName}</h2>
-              <p className="text-sm text-gray-500">{report.jobTitle}</p>
+              <h2 className="text-base font-bold text-gray-900 dark:text-white">{report.candidateName}</h2>
+              <p className="text-sm text-gray-500 dark:text-slate-400">{report.jobTitle}</p>
             </div>
           </div>
 
@@ -129,33 +129,33 @@ export default function CandidateReportPage() {
         </div>
 
         {/* AI Değerlendirme */}
-        <div className="bg-primary-50 border border-primary-100 rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-primary-900 mb-2">Yapay Zeka Değerlendirmesi</h3>
-          <p className="text-sm text-primary-800 leading-relaxed">{report.aiEvaluation}</p>
+        <div className="glass-panel p-5 border-blue-500/20 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/10">
+          <h3 className="text-sm font-bold text-blue-900 dark:text-blue-300 mb-2">Yapay Zeka Değerlendirmesi</h3>
+          <p className="text-sm text-blue-800 dark:text-blue-200/80 leading-relaxed">{report.aiEvaluation}</p>
         </div>
 
         {/* Soru puanları */}
-        <div className="bg-white rounded-xl border border-gray-200 p-6">
-          <h3 className="text-base font-semibold text-gray-900 mb-4">Soru Bazlı Değerlendirme</h3>
+        <div className="glass-panel p-6">
+          <h3 className="text-base font-bold text-gray-900 dark:text-white mb-4">Soru Bazlı Değerlendirme</h3>
           <div className="space-y-4">
             {report.questionScores.map((qs, idx) => (
-              <div key={idx} className="border-b border-gray-50 pb-4 last:border-0 last:pb-0">
+              <div key={idx} className="border-b border-gray-50 dark:border-slate-700/30 pb-4 last:border-0 last:pb-0">
                 <div className="flex items-start justify-between gap-4 mb-2">
-                  <p className="text-sm text-gray-700 flex-1 leading-relaxed">
-                    <span className="font-medium text-gray-900">S{idx + 1}:</span> {qs.question}
+                  <p className="text-sm text-gray-700 dark:text-slate-300 flex-1 leading-relaxed">
+                    <span className="font-bold text-gray-900 dark:text-white">S{idx + 1}:</span> {qs.question}
                   </p>
-                  <span className="text-sm font-semibold flex-shrink-0" style={{ color: getScoreColor(qs.score) }}>
+                  <span className="text-sm font-bold flex-shrink-0" style={{ color: getScoreColor(qs.score) }}>
                     {qs.score}/100
                   </span>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-1.5 mb-1.5">
+                <div className="w-full bg-gray-100 dark:bg-slate-700/50 rounded-full h-1.5 mb-1.5">
                   <div
                     className="h-1.5 rounded-full transition-all"
                     style={{ width: `${qs.score}%`, backgroundColor: getScoreColor(qs.score) }}
                   />
                 </div>
                 {qs.feedback && (
-                  <p className="text-xs text-gray-500 italic">{qs.feedback}</p>
+                  <p className="text-xs text-gray-500 dark:text-slate-400 italic">{qs.feedback}</p>
                 )}
               </div>
             ))}
@@ -164,22 +164,22 @@ export default function CandidateReportPage() {
 
         {/* Güçlü yönler & Gelişim alanları */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Güçlü Yönler</h3>
+          <div className="glass-panel p-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Güçlü Yönler</h3>
             <ul className="space-y-2">
               {report.strengths.map((s, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-slate-300">
                   <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5" />
                   {s}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="bg-white rounded-xl border border-gray-200 p-5">
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Gelişim Alanları</h3>
+          <div className="glass-panel p-5">
+            <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Gelişim Alanları</h3>
             <ul className="space-y-2">
               {report.weaknesses.map((w, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
+                <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-slate-300">
                   <AlertTriangle className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                   {w}
                 </li>

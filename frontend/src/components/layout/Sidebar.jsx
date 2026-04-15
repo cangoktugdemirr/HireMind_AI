@@ -1,16 +1,16 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, Briefcase, PlusCircle, LogOut, Brain } from 'lucide-react';
+import { LayoutDashboard, FileText, PlusCircle, LogOut } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const NavItem = ({ to, icon: Icon, label }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
-      `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+      `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
         isActive
-          ? 'bg-white/15 text-white'
-          : 'text-white/70 hover:bg-white/10 hover:text-white'
+          ? 'bg-blue-50 text-blue-600 border border-blue-100 dark:bg-blue-500/10 dark:text-blue-400 dark:border-blue-500/20 shadow-sm'
+          : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800 dark:text-slate-400 dark:hover:bg-slate-800/40 dark:hover:text-white border border-transparent'
       }`
     }
   >
@@ -25,21 +25,25 @@ export default function Sidebar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/');
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col" style={{ backgroundColor: '#1E3A5F' }}>
+    <aside className="fixed left-0 top-0 h-full w-64 flex flex-col bg-[var(--bg-sidebar)] border-r border-[var(--card-border)] z-30 transition-colors duration-300">
       {/* Logo */}
-      <div className="flex items-center gap-3 px-6 py-5 border-b border-white/10">
-        <div className="w-8 h-8 bg-primary-500 rounded-lg flex items-center justify-center">
-          <Brain className="w-5 h-5 text-white" />
+      <div className="flex items-center gap-3 px-6 py-6 border-b border-[var(--card-border)]">
+        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
+          <img src="/logo.svg" alt="HireMind" className="w-6 h-6 object-contain" />
         </div>
-        <span className="text-white font-bold text-lg">HireMind AI</span>
+        <div>
+          <span className="text-lg font-extrabold text-[var(--text-primary)] tracking-tight block leading-tight">HireMind</span>
+          <span className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-[0.2em]">{user?.role === 'hr' ? 'İK Paneli' : 'Aday Portalı'}</span>
+        </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 px-3 py-4 space-y-1">
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-5 space-y-1.5">
+        <p className="px-4 mb-3 text-[10px] text-gray-400 dark:text-slate-600 font-bold uppercase tracking-[0.2em]">Menü</p>
         {user?.role === 'candidate' ? (
           <>
             <NavItem to="/candidate/dashboard" icon={LayoutDashboard} label="Panelim" />
@@ -53,23 +57,23 @@ export default function Sidebar() {
         )}
       </nav>
 
-      {/* User + Logout */}
-      <div className="px-3 pb-4 border-t border-white/10 pt-4">
-        <div className="flex items-center gap-3 px-4 py-2 mb-2">
-          <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-white text-sm font-semibold">
+      {/* User */}
+      <div className="px-3 pb-6 border-t border-gray-100 dark:border-slate-800/60 pt-5">
+        <div className="flex items-center gap-3 px-3 py-3 mb-3 bg-gray-50 dark:bg-slate-800/30 rounded-xl border border-gray-100 dark:border-slate-700/30">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-violet-500/20 flex-shrink-0">
             {user?.name?.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-white text-sm font-medium truncate">{user?.name}</p>
-            <p className="text-white/50 text-xs">{user?.role === 'hr' ? 'İK Uzmanı' : 'Aday'}</p>
+            <p className="text-gray-800 dark:text-slate-100 text-sm font-semibold truncate">{user?.name}</p>
+            <p className="text-gray-400 dark:text-slate-500 text-xs font-medium">{user?.role === 'hr' ? 'İK Uzmanı' : 'Aday'}</p>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 border border-transparent transition-all"
         >
           <LogOut className="w-5 h-5" />
-          Çıkış Yap
+          Güvenli Çıkış
         </button>
       </div>
     </aside>

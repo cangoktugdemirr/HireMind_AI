@@ -41,23 +41,27 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// POST /api/auth/login
+  // POST /api/auth/login
 router.post('/login', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = req.body; // email is now treated as identifier
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'E-posta ve şifre zorunludur' });
+      return res.status(400).json({ message: 'Kullanıcı adı/E-posta ve şifre zorunludur' });
     }
 
-    const user = await User.findOne({ email });
+    // Try finding by email or name
+    const user = await User.findOne({
+      $or: [{ email: email.toLowerCase() }, { name: email }]
+    });
+
     if (!user) {
-      return res.status(401).json({ message: 'E-posta veya şifre hatalı' });
+      return res.status(401).json({ message: 'Kullanıcı bulunamadı veya şifre hatalı' });
     }
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.status(401).json({ message: 'E-posta veya şifre hatalı' });
+      return res.status(401).json({ message: 'Kullanıcı bulunamadı veya şifre hatalı' });
     }
 
     const token = signToken(user);
