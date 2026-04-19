@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { PlusCircle, Briefcase, Users, CheckCircle, ChevronRight, TrendingUp, Activity, BarChart3, Clock, Target, ArrowUpRight, ArrowDownRight, Search } from 'lucide-react';
+import { PlusCircle, Briefcase, Users, CheckCircle, ChevronRight, TrendingUp, Activity, BarChart3, Clock, Target, ArrowUpRight, ArrowDownRight, Search, Calendar, MessageSquare, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, AreaChart, Area, XAxis } from 'recharts';
 import DashboardLayout from '../../components/layout/DashboardLayout';
@@ -89,14 +89,24 @@ export default function HRDashboard() {
           <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
           <div className="absolute -left-8 -bottom-8 w-48 h-48 rounded-full bg-cyan-400/10 blur-3xl"></div>
         </div>
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-1.5">
-              Hoş geldin, {user?.name || 'İK Uzmanı'} 👋
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
+              Hoş geldin, {user?.name?.split(' (')[0] || 'İK Uzmanı'} 👋
             </h2>
-            <p className="text-blue-100/70 text-sm max-w-lg">
+            <p className="text-blue-100/90 text-sm max-w-lg font-medium leading-relaxed">
               İlanlarınızı yönetin, adayları takip edin ve mülakat süreçlerini analiz edin.
             </p>
+          </div>
+          <div className="flex gap-4">
+             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px]">
+                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Görüşülecek</p>
+                 <p className="text-3xl font-black">12</p>
+             </div>
+             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px] hidden lg:block">
+                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">YZ Eşleşimi</p>
+                 <p className="text-3xl font-black text-amber-300">4 Yeni</p>
+             </div>
           </div>
         </div>
       </motion.div>
@@ -157,20 +167,15 @@ export default function HRDashboard() {
 
           {filteredPostings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 px-4 text-center flex-1">
-              <div className="w-20 h-20 bg-slate-100 dark:bg-slate-900/50 rounded-2xl flex items-center justify-center mb-5 border border-slate-200 dark:border-slate-700/30">
-                <Briefcase className="w-10 h-10 text-gray-300 dark:text-slate-600" />
+              <div className="w-20 h-20 bg-slate-100 dark:bg-slate-900/50 rounded-2xl flex items-center justify-center mb-5 border border-slate-200 dark:border-slate-700/30 shadow-inner">
+                <Briefcase className="w-10 h-10 text-gray-400 dark:text-slate-500" />
               </div>
-              <h3 className="text-lg font-bold text-gray-700 dark:text-slate-300 mb-2">
-                {searchTerm ? 'Sonuç bulunamadı' : 'Henüz ilan oluşturmadınız'}
+              <h3 className="text-lg font-bold text-gray-800 dark:text-slate-200 mb-2">
+                {searchTerm ? 'Sonuç bulunamadı' : 'Henüz İlan Oluşturmadınız'}
               </h3>
-              <p className="text-sm text-gray-400 dark:text-slate-500 mb-6 max-w-sm">
-                {searchTerm ? 'Arama kriterlerinize uygun ilan yok.' : 'İlk ilanınızı oluşturun ve yapay zeka uygun adayları eşleştirsin.'}
+              <p className="text-sm text-gray-500 dark:text-slate-400 mb-6 max-w-sm">
+                {searchTerm ? 'Arama kriterlerinize uygun ilan yok.' : 'Yeni ilanlarınızı soldaki menüden oluşturabilir ve aday arayışını başlatabilirsiniz.'}
               </p>
-              {!searchTerm && (
-                <Button onClick={() => navigate('/hr/create-job')} className="!bg-blue-600 hover:!bg-blue-500 shadow-lg shadow-blue-500/20">
-                  <PlusCircle className="w-5 h-5 mr-2" /> İlk İlanı Oluştur
-                </Button>
-              )}
             </div>
           ) : (
             <div className="divide-y divide-gray-50 dark:divide-slate-800/40 overflow-y-auto max-h-[420px]">
@@ -295,6 +300,70 @@ export default function HRDashboard() {
               </AreaChart>
             </ResponsiveContainer>
           </div>
+        </motion.div>
+      </div>
+
+      {/* İkincil Araçlar (Mülakatlar ve Aktivite) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        {/* Yaklaşan Mülakatlar */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="glass-panel p-0 overflow-hidden">
+             <div className="p-6 border-b border-gray-100 dark:border-slate-800/60 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                   <div className="w-9 h-9 rounded-lg bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center">
+                     <Calendar className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                   </div>
+                   <h3 className="text-base font-bold text-gray-900 dark:text-white">Yaklaşan Mülakatlar</h3>
+                </div>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold cursor-pointer">Tümünü Gör</span>
+             </div>
+             <div className="divide-y divide-gray-50 dark:border-gray-100 dark:divide-slate-800/40">
+                {[1,2,3].map((i) => (
+                    <div key={i} className="p-5 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors">
+                        <div className="text-center w-12 flex-shrink-0">
+                           <p className="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">{['Pzt','Çar','Cum'][i-1]}</p>
+                           <p className="text-xl font-black text-gray-900 dark:text-white leading-none">{10 + i}</p>
+                        </div>
+                        <div className="w-px h-10 bg-gray-200 dark:bg-slate-700"></div>
+                        <div className="flex-1 min-w-0">
+                           <p className="text-sm font-bold text-gray-900 dark:text-white truncate">Frontend Developer Teknik Test</p>
+                           <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 flex items-center gap-2">
+                              <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 14:00</span>
+                              <span className="flex items-center gap-1"><Users className="w-3 h-3" /> Ahmet Yılmaz</span>
+                           </p>
+                        </div>
+                    </div>
+                ))}
+             </div>
+        </motion.div>
+
+        {/* Aktivite Akışı */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="glass-panel p-6">
+             <div className="flex items-center gap-3 mb-6">
+                 <div className="w-9 h-9 rounded-lg bg-purple-100 dark:bg-purple-500/10 flex items-center justify-center">
+                   <Activity className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                 </div>
+                 <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Aktiviteler</h3>
+             </div>
+             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 dark:before:via-slate-700 before:to-transparent">
+                {[
+                   { icon: Star, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-500/20', title: 'Yeni Aday Eşleşti', desc: 'Yapay zeka "Senior Node.js" ilanı için sistemdeki Mehmet Kaya\'yı 98% skor ile önerdi.', time: '10 dk önce' },
+                   { icon: CheckCircle, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-500/20', title: 'Mülakat Tamamlandı', desc: 'React Developer pozisyonu için Ayşe Demir\'in 1. aşama mülakatı onaylandı.', time: '2 saat önce' },
+                   { icon: MessageSquare, color: 'text-blue-500', bg: 'bg-blue-100 dark:bg-blue-500/20', title: 'Aday Mesajı', desc: 'Can Yılmaz teknik test sonucunu sisteme yükledi.', time: 'Dün' },
+                ].map((act, i) => (
+                    <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
+                        <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${act.bg} shadow shrink-0 md:order-1 z-10 mx-auto`}>
+                            <act.icon className={`w-4 h-4 ${act.color}`} />
+                        </div>
+                        <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] bg-gray-50 dark:bg-slate-800/40 p-4 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
+                            <div className="flex items-center justify-between mb-1">
+                                <span className="font-bold text-sm text-gray-900 dark:text-white">{act.title}</span>
+                                <span className="text-[10px] text-gray-400 font-semibold">{act.time}</span>
+                            </div>
+                            <div className="text-xs text-gray-500 dark:text-slate-400">{act.desc}</div>
+                        </div>
+                    </div>
+                ))}
+             </div>
         </motion.div>
       </div>
 
