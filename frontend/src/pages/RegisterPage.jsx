@@ -22,14 +22,14 @@ export default function RegisterPage() {
     }
     setLoading(true);
     try {
-      const { data } = await api.post('/auth/register', {
+      await api.post('/auth/register', {
         name: form.name,
         email: form.email,
         password: form.password,
         role: 'candidate'
       });
-      login(data.token, data.user);
-      navigate('/candidate/dashboard');
+      // Artık otomatik giriş yapmıyoruz! Direkt login sayfasına atıyoruz
+      navigate('/login', { state: { successMsg: 'Kayıt başarılı! Lütfen giriş yapınız.' } });
     } catch (err) {
       setError(err.response?.data?.message || 'Kayıt olunamadı');
     } finally {
