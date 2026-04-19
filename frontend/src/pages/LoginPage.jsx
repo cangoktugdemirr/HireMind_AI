@@ -40,7 +40,7 @@ export default function LoginPage() {
       <div className="blob bg-blue-500/20 w-96 h-96 -top-10 -left-10 md:w-[600px] md:h-[600px]"></div>
       <div className="blob bg-purple-500/20 w-96 h-96 bottom-0 right-0 md:w-[600px] md:h-[600px]" style={{ animationDelay: '2s' }}></div>
 
-      <div className="glass-panel w-full max-w-md p-8 relative z-10">
+      <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 flex items-center justify-center mb-4">
             <img src="/logo.svg" alt="HireMind Logo" className="w-16 h-16 object-contain drop-shadow-xl" />

@@ -97,16 +97,19 @@ const LandingPage = () => {
               icon={<Bot className="text-cyan-400 w-8 h-8" />}
               title="Otonom Mülakatlar"
               description="Adaylarla dinamik sesli veya yazılı mülakatlar gerçekleştiren size özel AI asistanı."
+              index={0}
             />
             <FeatureCard 
               icon={<Briefcase className="text-blue-400 w-8 h-8" />}
               title="Akıllı CV Analizi"
               description="Binlerce CV'yi saniyeler içinde tarayın, role en uygun adayları yüzdeler eşliğinde listeyin."
+              index={1}
             />
             <FeatureCard 
               icon={<CheckCircle2 className="text-purple-400 w-8 h-8" />}
               title="Detaylı Raporlar"
               description="Mülakat sonrası yetkinlik bazlı, objektif ve veri odaklı değerlendirme raporları alın."
+              index={2}
             />
           </motion.div>
         </section>
@@ -160,14 +163,21 @@ const LandingPage = () => {
   );
 };
 
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="glass-panel p-10 hover:border-blue-500/40 transition-all duration-500 group">
-    <div className="bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500">
+const FeatureCard = ({ icon, title, description, index }) => (
+  <motion.div 
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ delay: index * 0.1, duration: 0.5 }}
+    className="glass-panel-dark p-10 hover:border-blue-500/40 hover:bg-slate-900/40 transition-all duration-500 group relative overflow-hidden"
+  >
+    <div className="absolute -right-8 -top-8 w-24 h-24 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-all"></div>
+    <div className="bg-blue-500/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-8 border border-blue-500/20 group-hover:scale-110 transition-transform duration-500 shadow-inner shadow-blue-500/10">
       {icon}
     </div>
     <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">{title}</h3>
-    <p className="text-slate-400 leading-relaxed font-medium">{description}</p>
-  </div>
+    <p className="text-slate-400 leading-relaxed font-medium text-sm lg:text-base">{description}</p>
+  </motion.div>
 );
 
 export default LandingPage;
