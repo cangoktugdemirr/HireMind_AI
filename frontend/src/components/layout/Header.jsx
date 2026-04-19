@@ -19,8 +19,6 @@ export default function Header({ title }) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-  const { user } = useAuth();
-  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="fixed top-0 left-64 right-0 h-16 bg-[var(--bg-header)] backdrop-blur-xl border-b border-[var(--card-border)] flex items-center justify-between px-6 z-20 transition-colors duration-300">
