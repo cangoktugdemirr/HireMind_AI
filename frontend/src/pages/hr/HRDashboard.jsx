@@ -98,12 +98,6 @@ export default function HRDashboard() {
               İlanlarınızı yönetin, adayları takip edin ve mülakat süreçlerini analiz edin.
             </p>
           </div>
-          <Button
-            onClick={() => navigate('/hr/create-job')}
-            className="hidden md:flex !bg-white !text-blue-700 hover:!bg-blue-50 font-bold shadow-lg border-none"
-          >
-            <PlusCircle className="w-5 h-5 mr-2" /> Yeni İlan Oluştur
-          </Button>
         </div>
       </motion.div>
 
@@ -158,9 +152,6 @@ export default function HRDashboard() {
                   className="pl-9 pr-4 py-2 text-sm bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-700/50 rounded-xl text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/30 w-44 transition-all"
                 />
               </div>
-              <Button size="sm" onClick={() => navigate('/hr/create-job')} className="!bg-blue-600 hover:!bg-blue-500 border-none shadow-md shadow-blue-500/20">
-                <PlusCircle className="w-4 h-4 mr-1.5" /> Yeni İlan
-              </Button>
             </div>
           </div>
 
@@ -312,8 +303,8 @@ export default function HRDashboard() {
         className="grid grid-cols-1 sm:grid-cols-3 gap-4"
       >
         {[
-          { label: 'Yeni İlan Oluştur', desc: 'Pozisyon tanımlayın', icon: PlusCircle, gradient: 'from-blue-500 to-blue-600', onClick: () => navigate('/hr/create-job') },
-          { label: 'İlanları Yönet', desc: 'Aktif ilanları düzenleyin', icon: Briefcase, gradient: 'from-violet-500 to-purple-600', onClick: () => window.scrollTo({ top: 400, behavior: 'smooth' }) },
+          { label: 'İlanları Yönet', desc: 'Aktif ilanları düzenleyin', icon: Briefcase, gradient: 'from-blue-500 to-blue-600', onClick: () => window.scrollTo({ top: 400, behavior: 'smooth' }) },
+          { label: 'Aday Havuzu', desc: 'Tüm adayları inceleyin', icon: Users, gradient: 'from-violet-500 to-purple-600', onClick: () => {} },
           { label: 'Performans Raporu', desc: 'Analiz ve istatistikler', icon: BarChart3, gradient: 'from-emerald-500 to-green-600', onClick: () => {} },
         ].map((a) => (
           <div key={a.label} onClick={a.onClick}
