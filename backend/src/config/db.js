@@ -9,9 +9,11 @@ const connectDB = async () => {
   }
 
   try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+    const uri = process.env.MONGODB_URI ? process.env.MONGODB_URI.trim() : '';
+    const conn = await mongoose.connect(uri, {
       serverSelectionTimeoutMS: 5000, // Timeout after 5s instead of 30s
-      family: 4 // Use IPv4, skip trying IPv6 (fixes Vercel DNS issues with MongoDB Atlas)
+      family: 4, // Use IPv4, skip IPv6
+      bufferCommands: false // Disable buffering to show the REAL network error
     });
     console.log(`MongoDB bağlandı: ${conn.connection.host}`);
     cachedConnection = conn;

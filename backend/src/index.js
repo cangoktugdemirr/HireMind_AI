@@ -5,7 +5,16 @@ const connectDB = require('./config/db');
 
 const app = express();
 
-connectDB();
+// Require DB connection before any route is processed
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('Database connection failed:', err);
+    res.status(500).json({ message: 'Veritabanı bağlantı hatası: ' + err.message });
+  }
+});
 
 // CORS ayarı: Geliştirme aşamasında localhost:5173, üretimde ise her yere (veya VERCEL URL'sine) izin ver
 const allowedOrigins = [
