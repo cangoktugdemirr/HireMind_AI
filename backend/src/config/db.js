@@ -17,7 +17,6 @@ const connectDB = async () => {
     console.log('MongoDB: Yeni bağlantı başlatılıyor...');
     cached.promise = mongoose.connect(uri, {
       serverSelectionTimeoutMS: 5000,
-      family: 4
     }).then((mongooseInstance) => {
       return mongooseInstance;
     });
