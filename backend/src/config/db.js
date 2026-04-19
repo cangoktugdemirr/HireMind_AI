@@ -1,4 +1,10 @@
 const mongoose = require('mongoose');
+const dns = require('dns');
+
+// Force DNS servers to bypass Vercel DNS resolution issues for SRV records
+if (process.env.VERCEL) {
+  dns.setServers(['8.8.8.8', '8.8.4.4']);
+}
 
 // Official Serverless cache pattern
 let cached = global.mongoose;
