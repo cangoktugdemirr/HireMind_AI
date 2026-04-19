@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
     });
   } catch (err) {
     console.error('Register hatası:', err);
-    res.status(500).json({ message: 'Sunucu hatası' });
+    res.status(500).json({ message: 'Sunucu hatası: ' + err.message });
   }
 });
 
@@ -71,7 +71,7 @@ router.post('/login', async (req, res) => {
     });
   } catch (err) {
     console.error('Login hatası:', err);
-    res.status(500).json({ message: 'Sunucu hatası' });
+    res.status(500).json({ message: 'Sunucu hatası: ' + err.message });
   }
 });
 
