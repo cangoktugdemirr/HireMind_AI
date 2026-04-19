@@ -18,7 +18,11 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       localStorage.removeItem('hiremind_token');
       localStorage.removeItem('hiremind_user');
-      window.location.href = '/login';
+      
+      const isAuthPage = ['/login', '/hr-login', '/register'].includes(window.location.pathname);
+      if (!isAuthPage) {
+        window.location.href = '/login';
+      }
     }
     return Promise.reject(error);
   }
