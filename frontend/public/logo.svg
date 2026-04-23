@@ -1,11 +1,50 @@
 <svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M128 28C81.608 28 44 65.608 44 112C44 140.244 57.9405 165.234 80 180.49V212C80 220.837 87.1634 228 96 228H160C168.837 228 176 220.837 176 212V180.49C198.059 165.234 212 140.244 212 112C212 65.608 174.392 28 128 28Z" fill="url(#paint0_linear)"/>
-  <path d="M80 176H176V212C176 216.418 172.418 220 168 220H88C83.5817 220 80 216.418 80 212V176Z" fill="#1E3A8A"/>
-  <path d="M128 56C97.0721 56 72 81.0721 72 112C72 129.544 80.0638 145.207 92.7938 155.389L96 157.953V180C96 182.209 97.7909 184 100 184H156C158.209 184 160 182.209 160 180V157.953L163.206 155.389C175.936 145.207 184 129.544 184 112C184 81.0721 158.928 56 128 56ZM116 148H100L112 112H100L128 68V116H144L116 148Z" fill="white"/>
   <defs>
-    <linearGradient id="paint0_linear" x1="44" y1="28" x2="212" y2="228" gradientUnits="userSpaceOnUse">
-      <stop stopColor="#3B82F6"/>
-      <stop offset="1" stopColor="#06B6D4"/>
+    <linearGradient id="grad_main" x1="32" y1="32" x2="224" y2="224" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="grad_accent" x1="80" y1="60" x2="176" y2="196" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
     </linearGradient>
   </defs>
+
+  <!-- Ana kare arka plan - yuvarlatılmış köşeler -->
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#grad_main)"/>
+
+  <!-- İç parlama efekti -->
+  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#grad_accent)" opacity="0.15"/>
+
+  <!-- Merkez: Stilize "H" harfi + beyin devre motifi -->
+  <!-- Sol dikey çizgi -->
+  <rect x="72" y="68" width="22" height="120" rx="11" fill="white"/>
+  <!-- Sağ dikey çizgi -->
+  <rect x="162" y="68" width="22" height="120" rx="11" fill="white"/>
+  <!-- Orta yatay bağlantı -->
+  <rect x="72" y="117" width="112" height="22" rx="11" fill="white"/>
+
+  <!-- Beyin/AI devre nodları (üst) -->
+  <circle cx="83" cy="60" r="8" fill="white" opacity="0.9"/>
+  <circle cx="173" cy="60" r="8" fill="white" opacity="0.9"/>
+  <circle cx="128" cy="48" r="6" fill="white" opacity="0.6"/>
+
+  <!-- Üst devre bağlantıları -->
+  <line x1="83" y1="60" x2="128" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="173" y1="60" x2="128" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Alt devre nodları -->
+  <circle cx="83" cy="196" r="8" fill="white" opacity="0.9"/>
+  <circle cx="173" cy="196" r="8" fill="white" opacity="0.9"/>
+  <circle cx="128" cy="208" r="6" fill="white" opacity="0.6"/>
+
+  <!-- Alt devre bağlantıları -->
+  <line x1="83" y1="196" x2="128" y2="208" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="173" y1="196" x2="128" y2="208" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Orta yan nodlar (yapay zeka sinir ağı hissi) -->
+  <circle cx="52" cy="128" r="5" fill="white" opacity="0.4"/>
+  <circle cx="204" cy="128" r="5" fill="white" opacity="0.4"/>
+  <line x1="52" y1="128" x2="72" y2="128" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+  <line x1="184" y1="128" x2="204" y2="128" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
 </svg>
