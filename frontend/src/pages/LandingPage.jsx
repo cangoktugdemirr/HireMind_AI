@@ -31,8 +31,8 @@ const LandingPage = () => {
       <nav className="relative z-20 border-b border-white/5 bg-[#060910]/80 backdrop-blur-xl sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <img src="/logo.svg" alt="HireMind" className="w-6 h-6 object-contain" />
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+              <img src="/logo.svg" alt="HireMind" className="w-10 h-10 object-contain brightness-0 invert" />
             </div>
             <span className="text-2xl font-black text-white tracking-tight">HireMind</span>
           </div>
@@ -146,8 +146,8 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
-                      <img src="/logo.svg" alt="HireMind" className="w-5 h-5" />
+                    <div className="w-8 h-8 rounded-lg flex items-center justify-center">
+                      <img src="/logo.svg" alt="HireMind" className="w-8 h-8 object-contain brightness-0 invert" />
                     </div>
                     <span className="text-xl font-black text-white tracking-tight">HireMind</span>
                 </div>

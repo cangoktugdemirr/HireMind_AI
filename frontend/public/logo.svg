@@ -1,50 +1,44 @@
-<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="grad_main" x1="32" y1="32" x2="224" y2="224" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#2563EB"/>
-      <stop offset="100%" stop-color="#06B6D4"/>
-    </linearGradient>
-    <linearGradient id="grad_accent" x1="80" y1="60" x2="176" y2="196" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#60A5FA"/>
-      <stop offset="100%" stop-color="#22D3EE"/>
-    </linearGradient>
-  </defs>
+<svg width="256" height="256" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- HireMind HR Logo - Orbital swoosh ile mülakat masalı HR logosu -->
+  
+  <!-- H Harfi -->
+  <rect x="80" y="120" width="42" height="272" fill="#162544"/>
+  <rect x="80" y="120" width="42" height="36" fill="#162544"/>
+  <rect x="175" y="120" width="42" height="272" fill="#162544"/>
+  <rect x="80" y="232" width="137" height="42" fill="#162544"/>
 
-  <!-- Ana kare arka plan - yuvarlatılmış köşeler -->
-  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#grad_main)"/>
+  <!-- R Harfi -->
+  <rect x="262" y="120" width="42" height="272" fill="#162544"/>
+  <!-- R üst kafa (yarım daire) -->
+  <path d="M262 120 L262 156 L340 156 Q380 156 380 200 Q380 232 340 232 L262 232 L262 120 L340 120 Q395 120 395 192 Q395 232 340 232" fill="#162544"/>
+  <!-- R bacak (çapraz) -->
+  <polygon points="300,232 330,232 395,392 365,392" fill="#162544"/>
 
-  <!-- İç parlama efekti -->
-  <rect x="16" y="16" width="224" height="224" rx="56" fill="url(#grad_accent)" opacity="0.15"/>
+  <!-- Mülakat Masası (HR harfleri arasında, ortada alt kısımda) -->
+  <!-- Masa yüzeyi -->
+  <rect x="195" y="295" width="76" height="8" rx="4" fill="#162544"/>
+  <!-- Masa ayağı ortada -->
+  <rect x="230" y="303" width="6" height="30" fill="#162544"/>
+  <!-- Masa tabanı -->
+  <rect x="218" y="333" width="30" height="6" rx="3" fill="#162544"/>
 
-  <!-- Merkez: Stilize "H" harfi + beyin devre motifi -->
-  <!-- Sol dikey çizgi -->
-  <rect x="72" y="68" width="22" height="120" rx="11" fill="white"/>
-  <!-- Sağ dikey çizgi -->
-  <rect x="162" y="68" width="22" height="120" rx="11" fill="white"/>
-  <!-- Orta yatay bağlantı -->
-  <rect x="72" y="117" width="112" height="22" rx="11" fill="white"/>
+  <!-- Sol sandalye -->
+  <rect x="196" y="315" width="20" height="6" rx="3" fill="#162544"/>
+  <rect x="196" y="295" width="5" height="26" rx="2" fill="#162544"/>
+  <rect x="198" y="321" width="4" height="14" fill="#162544"/>
+  <rect x="212" y="321" width="4" height="14" fill="#162544"/>
 
-  <!-- Beyin/AI devre nodları (üst) -->
-  <circle cx="83" cy="60" r="8" fill="white" opacity="0.9"/>
-  <circle cx="173" cy="60" r="8" fill="white" opacity="0.9"/>
-  <circle cx="128" cy="48" r="6" fill="white" opacity="0.6"/>
+  <!-- Sağ sandalye -->
+  <rect x="250" y="315" width="20" height="6" rx="3" fill="#162544"/>
+  <rect x="265" y="295" width="5" height="26" rx="2" fill="#162544"/>
+  <rect x="252" y="321" width="4" height="14" fill="#162544"/>
+  <rect x="266" y="321" width="4" height="14" fill="#162544"/>
 
-  <!-- Üst devre bağlantıları -->
-  <line x1="83" y1="60" x2="128" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-  <line x1="173" y1="60" x2="128" y2="48" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-
-  <!-- Alt devre nodları -->
-  <circle cx="83" cy="196" r="8" fill="white" opacity="0.9"/>
-  <circle cx="173" cy="196" r="8" fill="white" opacity="0.9"/>
-  <circle cx="128" cy="208" r="6" fill="white" opacity="0.6"/>
-
-  <!-- Alt devre bağlantıları -->
-  <line x1="83" y1="196" x2="128" y2="208" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-  <line x1="173" y1="196" x2="128" y2="208" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-
-  <!-- Orta yan nodlar (yapay zeka sinir ağı hissi) -->
-  <circle cx="52" cy="128" r="5" fill="white" opacity="0.4"/>
-  <circle cx="204" cy="128" r="5" fill="white" opacity="0.4"/>
-  <line x1="52" y1="128" x2="72" y2="128" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
-  <line x1="184" y1="128" x2="204" y2="128" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+  <!-- Orbital Swoosh - üst yarısı (harflerin önünden geçer) -->
+  <path d="M 30 220 Q 60 130, 180 115 Q 256 105, 360 120 Q 460 140, 485 220" 
+        stroke="#162544" stroke-width="12" fill="none" stroke-linecap="round"/>
+  
+  <!-- Orbital Swoosh - alt yarısı (harflerin arkasından geçer, daha ince/silik) -->
+  <path d="M 485 220 Q 465 280, 360 295 Q 256 310, 150 295 Q 55 275, 30 220" 
+        stroke="#162544" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.3"/>
 </svg>

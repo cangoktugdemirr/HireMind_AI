@@ -32,8 +32,8 @@ export default function Sidebar() {
     <aside className="fixed left-0 top-0 h-full w-64 flex flex-col bg-[var(--bg-sidebar)] border-r border-[var(--card-border)] z-30 transition-colors duration-300">
       {/* Logo */}
       <div className="flex items-center gap-3 px-6 py-6 border-b border-[var(--card-border)]">
-        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-          <img src="/logo.svg" alt="HireMind" className="w-6 h-6 object-contain" />
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+          <img src="/logo.svg" alt="HireMind" className="w-10 h-10 object-contain" />
         </div>
         <div>
           <span className="text-lg font-extrabold text-[var(--text-primary)] tracking-tight block leading-tight">HireMind</span>
