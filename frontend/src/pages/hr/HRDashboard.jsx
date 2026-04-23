@@ -16,6 +16,7 @@ const fadeUp = {
 
 export default function HRDashboard() {
   const [jobPostings, setJobPostings] = useState([]);
+  const [dashboardStats, setDashboardStats] = useState({ upcomingInterviews: [], recentActivities: [] });
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
@@ -24,8 +25,12 @@ export default function HRDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await api.get('/jobpostings');
-        setJobPostings(data.jobPostings || []);
+        const [jobsRes, statsRes] = await Promise.all([
+          api.get('/jobpostings'),
+          api.get('/jobpostings/dashboard-stats')
+        ]);
+        setJobPostings(jobsRes.data.jobPostings || []);
+        setDashboardStats(statsRes.data || { upcomingInterviews: [], recentActivities: [] });
       } catch (err) {
         console.error(err);
       } finally {
@@ -101,11 +106,11 @@ export default function HRDashboard() {
           <div className="flex gap-4">
              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px]">
                  <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Görüşülecek</p>
-                 <p className="text-3xl font-black">12</p>
+                 <p className="text-3xl font-black">{dashboardStats.upcomingInterviews.length}</p>
              </div>
              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px] hidden lg:block">
-                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">YZ Eşleşimi</p>
-                 <p className="text-3xl font-black text-amber-300">4 Yeni</p>
+                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Yeni Eşleşme</p>
+                 <p className="text-3xl font-black text-amber-300">{dashboardStats.recentActivities.filter(a => a.type === 'matched').length} Yeni</p>
              </div>
           </div>
         </div>
@@ -316,23 +321,34 @@ export default function HRDashboard() {
                 </div>
                 <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold cursor-pointer">Tümünü Gör</span>
              </div>
-             <div className="divide-y divide-gray-50 dark:border-gray-100 dark:divide-slate-800/40">
-                {[1,2,3].map((i) => (
-                    <div key={i} className="p-5 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors">
-                        <div className="text-center w-12 flex-shrink-0">
-                           <p className="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">{['Pzt','Çar','Cum'][i-1]}</p>
-                           <p className="text-xl font-black text-gray-900 dark:text-white leading-none">{10 + i}</p>
-                        </div>
-                        <div className="w-px h-10 bg-gray-200 dark:bg-slate-700"></div>
-                        <div className="flex-1 min-w-0">
-                           <p className="text-sm font-bold text-gray-900 dark:text-white truncate">Frontend Developer Teknik Test</p>
-                           <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 flex items-center gap-2">
-                              <span className="flex items-center gap-1"><Clock className="w-3 h-3" /> 14:00</span>
-                              <span className="flex items-center gap-1"><Users className="w-3 h-3" /> Ahmet Yılmaz</span>
-                           </p>
-                        </div>
-                    </div>
-                ))}
+             <div className="divide-y divide-gray-50 dark:border-gray-100 dark:divide-slate-800/40 min-h-[300px]">
+                {dashboardStats.upcomingInterviews.length === 0 ? (
+                  <div className="p-10 text-center opacity-40">
+                    <p className="text-sm">Henüz bekleyen mülakat yok</p>
+                  </div>
+                ) : (
+                  dashboardStats.upcomingInterviews.map((i) => {
+                    const dateObj = new Date(i.date);
+                    const day = dateObj.toLocaleDateString('tr-TR', { weekday: 'short' });
+                    const dayNum = dateObj.getDate();
+                    return (
+                      <div key={i._id} className="p-5 flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors" onClick={() => navigate(`/hr/job/${i._id}`)}>
+                          <div className="text-center w-12 flex-shrink-0">
+                             <p className="text-xs text-gray-500 dark:text-slate-400 font-bold uppercase">{day}</p>
+                             <p className="text-xl font-black text-gray-900 dark:text-white leading-none">{dayNum}</p>
+                          </div>
+                          <div className="w-px h-10 bg-gray-200 dark:bg-slate-700"></div>
+                          <div className="flex-1 min-w-0">
+                             <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{i.jobTitle}</p>
+                             <p className="text-xs text-gray-500 dark:text-slate-400 mt-1 flex items-center gap-2">
+                                <span className="flex items-center gap-1 opacity-70"><Clock className="w-3 h-3" /> {i.status}</span>
+                                <span className="flex items-center gap-1"><Users className="w-3 h-3" /> {i.candidateName}</span>
+                             </p>
+                          </div>
+                      </div>
+                    );
+                  })
+                )}
              </div>
         </motion.div>
 
@@ -344,25 +360,36 @@ export default function HRDashboard() {
                  </div>
                  <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Aktiviteler</h3>
              </div>
-             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 dark:before:via-slate-700 before:to-transparent">
-                {[
-                   { icon: Star, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-500/20', title: 'Yeni Aday Eşleşti', desc: 'Yapay zeka "Senior Node.js" ilanı için sistemdeki Mehmet Kaya\'yı 98% skor ile önerdi.', time: '10 dk önce' },
-                   { icon: CheckCircle, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-500/20', title: 'Mülakat Tamamlandı', desc: 'React Developer pozisyonu için Ayşe Demir\'in 1. aşama mülakatı onaylandı.', time: '2 saat önce' },
-                   { icon: MessageSquare, color: 'text-blue-500', bg: 'bg-blue-100 dark:bg-blue-500/20', title: 'Aday Mesajı', desc: 'Can Yılmaz teknik test sonucunu sisteme yükledi.', time: 'Dün' },
-                ].map((act, i) => (
-                    <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                        <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${act.bg} shadow shrink-0 md:order-1 z-10 mx-auto`}>
-                            <act.icon className={`w-4 h-4 ${act.color}`} />
-                        </div>
-                        <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] bg-gray-50 dark:bg-slate-800/40 p-4 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
-                            <div className="flex items-center justify-between mb-1">
-                                <span className="font-bold text-sm text-gray-900 dark:text-white">{act.title}</span>
-                                <span className="text-[10px] text-gray-400 font-semibold">{act.time}</span>
-                            </div>
-                            <div className="text-xs text-gray-500 dark:text-slate-400">{act.desc}</div>
-                        </div>
-                    </div>
-                ))}
+             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 dark:before:via-slate-700 before:to-transparent min-h-[250px]">
+                {dashboardStats.recentActivities.length === 0 ? (
+                  <div className="py-10 text-center opacity-40">
+                    <p className="text-sm">Henüz aktivite bulunmuyor</p>
+                  </div>
+                ) : (
+                  dashboardStats.recentActivities.map((act) => {
+                    const icons = {
+                      matched: { icon: Star, color: 'text-amber-500', bg: 'bg-amber-100 dark:bg-amber-500/20' },
+                      completed: { icon: CheckCircle, color: 'text-emerald-500', bg: 'bg-emerald-100 dark:bg-emerald-500/20' }
+                    };
+                    const config = icons[act.type] || { icon: Activity, color: 'text-blue-500', bg: 'bg-blue-100' };
+                    return (
+                      <div key={act.id} className="relative flex items-center justify-between md:justify-normal group is-active">
+                          <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${config.bg} shadow shrink-0 z-10 mr-4`}>
+                              <config.icon className={`w-4 h-4 ${config.color}`} />
+                          </div>
+                          <div className="flex-1 bg-gray-50 dark:bg-slate-800/40 p-4 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
+                              <div className="flex items-center justify-between mb-1">
+                                  <span className="font-bold text-sm text-gray-900 dark:text-white">{act.title}</span>
+                                  <span className="text-[10px] text-gray-400 font-semibold">{new Date(act.time).toLocaleDateString('tr-TR')}</span>
+                              </div>
+                              <div className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed font-medium">{act.desc}</div>
+                          </div>
+                      </div>
+                    );
+                  })
+                )}
+             </div>
+        </motion.div>
              </div>
         </motion.div>
       </div>

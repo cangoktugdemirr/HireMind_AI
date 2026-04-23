@@ -102,6 +102,69 @@ router.get('/', auth, requireRole('hr'), async (req, res) => {
   }
 });
 
+// GET /api/jobpostings/dashboard-stats — HR paneli için gerçek istatistikler ve aktiviteler
+router.get('/dashboard-stats', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const postings = await JobPosting.find({ hrUserId: req.user.id });
+    const jobIds = postings.map(p => p._id);
+
+    // Tüm mülakatları getir
+    const interviews = await Interview.find({ jobPostingId: { $in: jobIds } })
+      .populate('candidateId', 'name')
+      .populate('jobPostingId', 'title')
+      .sort({ createdAt: -1 })
+      .lean();
+
+    // Yaklaşan mülakatlar (bekleyen veya devam eden)
+    const upcomingInterviews = interviews
+      .filter(i => i.status === 'pending' || i.status === 'in_progress')
+      .slice(0, 5) // En fazla 5 tane göster
+      .map(i => ({
+        _id: i._id,
+        candidateName: i.candidateId?.name || 'Bilinmiyor',
+        jobTitle: i.jobPostingId?.title || 'Bilinmiyor',
+        status: i.status === 'pending' ? 'Bekliyor' : 'Devam Ediyor',
+        date: i.createdAt // Başlama tarihi vs. de eklenebilir
+      }));
+
+    // Son aktiviteler (Tamamlananlar veya yeni eşleşmeler)
+    // Aktivite akışı için mülakatları statülerine göre sıralayıp mix ediyoruz
+    const recentActivities = [];
+    
+    interviews.slice(0, 10).forEach(i => {
+      if (i.status === 'completed') {
+        recentActivities.push({
+          id: i._id + '-completed',
+          type: 'completed',
+          title: 'Mülakat Tamamlandı',
+          desc: `${i.jobPostingId?.title} pozisyonu için ${i.candidateId?.name} adlı adayın mülakatı tamamlandı.`,
+          time: i.completedAt || i.createdAt
+        });
+      } else {
+        recentActivities.push({
+          id: i._id + '-matched',
+          type: 'matched',
+          title: 'Yeni Aday Eşleşti',
+          desc: `Yapay zeka ${i.jobPostingId?.title} ilanı için ${i.candidateId?.name} adlı adayı eşleştirdi.`,
+          time: i.createdAt
+        });
+      }
+    });
+
+    // Zamana göre sırala (en güncel en üstte)
+    recentActivities.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+    res.json({
+      upcomingInterviews,
+      recentActivities: recentActivities.slice(0, 5) // Son 5 aktivite
+    });
+
+  } catch (err) {
+    console.error('Dashboard stats hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
 // GET /api/jobpostings/:id — İlan detayı + aday listesi
 router.get('/:id', auth, requireRole('hr'), async (req, res) => {
   try {
