@@ -48,7 +48,7 @@ export default function HRSettingsPage() {
           {/* Header */}
           <div className="p-6 border-b border-gray-100 dark:border-slate-800/60 bg-gradient-to-r from-slate-50 to-white dark:from-slate-900/50 dark:to-slate-900/20">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-blue-500" />
+              <ShieldCheck className="w-16 h-auto text-blue-500" />
               Hesap ve Güvenlik
             </h2>
             <p className="text-sm text-gray-500 dark:text-slate-400 mt-1">Hesap bilgilerinizi yönetin ve güvenliğinizi sağlayın.</p>

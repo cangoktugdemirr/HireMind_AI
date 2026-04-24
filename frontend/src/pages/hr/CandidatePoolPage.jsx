@@ -37,7 +37,7 @@ export default function CandidatePoolPage() {
         {/* Search & Stats */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div className="relative w-full md:w-96">
-            <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+            <Search className="w-16 h-auto absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
               placeholder="İsim veya yetenek ile ara..."
@@ -75,7 +75,7 @@ export default function CandidatePoolPage() {
                 className="glass-panel p-6 group hover:border-blue-500/50 transition-all cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-500/20">
+                  <div className="w-32 h-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-500/20">
                     {c.fullName.charAt(0)}
                   </div>
                   <div className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${

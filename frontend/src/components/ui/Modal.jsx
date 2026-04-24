@@ -24,7 +24,7 @@ export default function Modal({ isOpen, onClose, title, children, maxWidth = 'ma
               onClick={onClose}
               className="p-1.5 rounded-xl text-gray-400 hover:text-gray-600 dark:text-slate-400 dark:hover:text-slate-200 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors"
             >
-              <X className="w-5 h-5" />
+              <X className="w-16 h-auto" />
             </button>
           </div>
         )}

@@ -112,7 +112,7 @@ export default function HRDashboard() {
             className="glass-panel p-6 group hover:border-blue-500/40 transition-all cursor-default"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center`}>
+              <div className={`w-32 h-auto rounded-2xl ${s.bg} flex items-center justify-center`}>
                 <s.icon className={`w-6 h-6 ${s.color}`} />
               </div>
               <div className="text-[10px] font-black text-gray-400 dark:text-slate-600 uppercase tracking-widest">{s.trend}</div>
@@ -134,8 +134,8 @@ export default function HRDashboard() {
         >
           <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100 dark:border-slate-800/60 transition-colors">
             <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
-                <Briefcase className="w-5 h-5 text-white" />
+            <div className="w-32 h-auto rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center shadow-md">
+                <Briefcase className="w-16 h-auto text-white" />
               </div>
               <div>
                 <h2 className="text-base font-bold">Aktif İlanlar</h2>
@@ -159,7 +159,7 @@ export default function HRDashboard() {
           {filteredPostings.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-20 px-4 text-center flex-1">
               <div className="w-20 h-20 bg-slate-100 dark:bg-slate-900/50 rounded-2xl flex items-center justify-center mb-5 border border-slate-200 dark:border-slate-700/30 shadow-inner">
-                <Briefcase className="w-10 h-10 text-gray-400 dark:text-slate-500" />
+                <Briefcase className="w-32 h-auto text-gray-400 dark:text-slate-500" />
               </div>
               <h3 className="text-lg font-bold text-gray-800 dark:text-slate-200 mb-2">
                 {searchTerm ? 'Sonuç bulunamadı' : 'Henüz İlan Oluşturmadınız'}
@@ -180,8 +180,8 @@ export default function HRDashboard() {
                   onClick={() => navigate(`/hr/job/${p._id}`)}
                 >
                   <div className="flex items-center gap-4 flex-1 min-w-0">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-200/50 dark:border-blue-500/20 flex items-center justify-center flex-shrink-0">
-                      <Target className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    <div className="w-32 h-auto rounded-xl bg-gradient-to-br from-blue-100 to-indigo-100 dark:from-blue-500/10 dark:to-indigo-500/10 border border-blue-200/50 dark:border-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <Target className="w-16 h-auto text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-bold text-gray-800 dark:text-white truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{p.title}</p>
@@ -207,7 +207,7 @@ export default function HRDashboard() {
                         ></div>
                       </div>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-gray-300 dark:text-slate-600 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
+                    <ChevronRight className="w-16 h-auto text-gray-300 dark:text-slate-600 group-hover:text-blue-500 group-hover:translate-x-1 transition-all" />
                   </div>
                 </motion.div>
               ))}
@@ -264,7 +264,7 @@ export default function HRDashboard() {
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center py-10 opacity-40">
-                <Activity className="w-12 h-12 text-gray-300 dark:text-slate-600 mb-3" />
+                <Activity className="w-32 h-auto text-gray-300 dark:text-slate-600 mb-3" />
                 <p className="text-xs text-gray-400 dark:text-slate-600">Yeterli veri bulunmuyor</p>
               </div>
             )}
@@ -301,7 +301,7 @@ export default function HRDashboard() {
              <div className="p-6 border-b border-gray-100 dark:border-slate-800/60 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                    <div className="w-9 h-9 rounded-lg bg-orange-100 dark:bg-orange-500/10 flex items-center justify-center">
-                     <Calendar className="w-5 h-5 text-orange-600 dark:text-orange-400" />
+                     <Calendar className="w-16 h-auto text-orange-600 dark:text-orange-400" />
                    </div>
                    <h3 className="text-base font-bold text-gray-900 dark:text-white">Yaklaşan Mülakatlar</h3>
                 </div>
@@ -342,7 +342,7 @@ export default function HRDashboard() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="glass-panel p-6">
              <div className="flex items-center gap-3 mb-6">
                  <div className="w-9 h-9 rounded-lg bg-purple-100 dark:bg-purple-500/10 flex items-center justify-center">
-                   <Activity className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                   <Activity className="w-16 h-auto text-purple-600 dark:text-purple-400" />
                  </div>
                  <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Aktiviteler</h3>
              </div>
@@ -360,7 +360,7 @@ export default function HRDashboard() {
                     const config = icons[act.type] || { icon: Activity, color: 'text-blue-500', bg: 'bg-blue-100' };
                     return (
                       <div key={act.id} className="relative flex items-center gap-4 group">
-                          <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${config.bg} shadow shrink-0 z-10`}>
+                          <div className={`flex items-center justify-center w-32 h-auto rounded-full border border-white dark:border-slate-800 ${config.bg} shadow shrink-0 z-10`}>
                               <config.icon className={`w-4 h-4 ${config.color}`} />
                           </div>
                           <div className="flex-1 bg-gray-50 dark:bg-slate-800/40 p-3 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
@@ -382,8 +382,8 @@ export default function HRDashboard() {
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="glass-panel overflow-hidden mb-10">
         <div className="px-6 py-5 border-b border-gray-100 dark:border-slate-800/60 flex items-center justify-between">
            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg">
-                <Users className="w-5 h-5 text-white" />
+              <div className="w-32 h-auto rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <Users className="w-16 h-auto text-white" />
               </div>
               <div>
                 <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Başvuran Adaylar</h3>
@@ -399,7 +399,7 @@ export default function HRDashboard() {
              recentCVs.map((cv) => (
                <div key={cv._id} className="p-5 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
                   <div className="flex items-center gap-4">
-                     <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
+                     <div className="w-32 h-auto rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
                        {cv.fullName?.charAt(0)}
                      </div>
                      <div>
@@ -429,7 +429,7 @@ export default function HRDashboard() {
             className="stat-card cursor-pointer group hover:scale-[1.01]"
           >
             <div className="flex items-center gap-4">
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${a.gradient} flex items-center justify-center shadow-md`}>
+              <div className={`w-32 h-auto rounded-xl bg-gradient-to-br ${a.gradient} flex items-center justify-center shadow-md`}>
                 <a.icon className="w-6 h-6 text-white" />
               </div>
               <div>

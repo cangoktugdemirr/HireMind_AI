@@ -149,12 +149,12 @@ export default function CVFormPage() {
                     : `bg-transparent border-transparent hover:bg-gray-100 dark:hover:bg-slate-800`
                 }`}
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                <div className={`w-32 h-auto rounded-xl flex items-center justify-center transition-all duration-300 ${
                   activeStep === step.id 
                     ? `bg-blue-500 text-white shadow-lg` 
                     : `bg-gray-100 dark:bg-slate-800 text-gray-400 group-hover:scale-110`
                 }`}>
-                  <step.icon className="w-5 h-5" />
+                  <step.icon className="w-16 h-auto" />
                 </div>
                 <div className="flex-1">
                    <p className={`text-xs font-black uppercase tracking-widest ${activeStep === step.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-400 dark:text-slate-500'}`}>
@@ -178,8 +178,8 @@ export default function CVFormPage() {
               {activeStep === 'personal' && (
                 <motion.div key="personal" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-panel p-8 space-y-6">
                   <div className="flex items-center gap-4 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-                      <User className="w-5 h-5" />
+                    <div className="w-32 h-auto rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+                      <User className="w-16 h-auto" />
                     </div>
                     <h2 className="text-xl font-black text-gray-900 dark:text-white">Kişisel Bilgileriniz</h2>
                   </div>
@@ -208,8 +208,8 @@ export default function CVFormPage() {
               {activeStep === 'education' && (
                 <motion.div key="education" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-panel p-8 space-y-6">
                   <div className="flex items-center gap-4 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500">
-                      <GraduationCap className="w-5 h-5" />
+                    <div className="w-32 h-auto rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-500">
+                      <GraduationCap className="w-16 h-auto" />
                     </div>
                     <h2 className="text-xl font-black text-gray-900 dark:text-white">Eğitim Hayatınız</h2>
                   </div>
@@ -238,8 +238,8 @@ export default function CVFormPage() {
               {activeStep === 'experience' && (
                 <motion.div key="experience" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-panel p-8 space-y-6">
                   <div className="flex items-center gap-4 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                      <Briefcase className="w-5 h-5" />
+                    <div className="w-32 h-auto rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-500">
+                      <Briefcase className="w-16 h-auto" />
                     </div>
                     <h2 className="text-xl font-black text-gray-900 dark:text-white">İş Deneyimi</h2>
                   </div>
@@ -268,8 +268,8 @@ export default function CVFormPage() {
               {activeStep === 'skills' && (
                 <motion.div key="skills" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="glass-panel p-8 space-y-6">
                   <div className="flex items-center gap-4 mb-2">
-                    <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
-                      <Sparkles className="w-5 h-5" />
+                    <div className="w-32 h-auto rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500">
+                      <Sparkles className="w-16 h-auto" />
                     </div>
                     <h2 className="text-xl font-black text-gray-900 dark:text-white">Yetenek ve Vizyon</h2>
                   </div>
@@ -347,7 +347,7 @@ export default function CVFormPage() {
 
             <div className="glass-panel p-6 bg-blue-50/50 dark:bg-blue-500/5 border-blue-100 dark:border-blue-500/20">
                <div className="flex items-center gap-3 mb-4">
-                  <Rocket className="w-5 h-5 text-blue-500" />
+                  <Rocket className="w-16 h-auto text-blue-500" />
                   <h4 className="text-sm font-bold text-gray-800 dark:text-blue-200">Sırada Ne Var?</h4>
                </div>
                <p className="text-xs text-gray-500 dark:text-slate-400 leading-relaxed font-medium"> Profilini tamamladığında HireMind AI seni otomatik olarak dev şirketlerle eşleştirecek ve mülakata alacak.</p>

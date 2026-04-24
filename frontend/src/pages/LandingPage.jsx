@@ -31,7 +31,7 @@ const LandingPage = () => {
       <nav className="relative z-20 border-b border-white/5 bg-[#02040a]/80 backdrop-blur-xl sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-28 h-auto object-contain" />
+            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-56 h-auto object-contain" />
             <span className="text-2xl font-black text-white tracking-tight">HireMind</span>
           </div>
           <div className="hidden md:flex items-center gap-8 mr-8">
@@ -72,7 +72,7 @@ const LandingPage = () => {
 
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-5">
                 <Link to="/register" className="w-full sm:w-auto bg-[#1a263e] hover:bg-[#2a3b5e] text-white px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-2xl shadow-black/40 flex items-center justify-center gap-3 border border-white/5">
-                  Ücretsiz Başlayın <Zap className="w-5 h-5 fill-current" />
+                  Ücretsiz Başlayın <Zap className="w-16 h-auto fill-current" />
                 </Link>
                 <Link to="/hr-login" className="w-full sm:w-auto bg-slate-800/50 hover:bg-slate-800 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all border border-slate-700/50 flex items-center justify-center gap-3 backdrop-blur-sm">
                   Kurumsal Giriş
@@ -92,19 +92,19 @@ const LandingPage = () => {
             className="grid md:grid-cols-3 gap-8"
           >
             <FeatureCard 
-              icon={<Bot className="text-cyan-400 w-8 h-8" />}
+              icon={<Bot className="text-cyan-400 w-32 h-auto" />}
               title="Otonom Mülakatlar"
               description="Adaylarla dinamik sesli veya yazılı mülakatlar gerçekleştiren size özel AI asistanı."
               index={0}
             />
             <FeatureCard 
-              icon={<Briefcase className="text-blue-400 w-8 h-8" />}
+              icon={<Briefcase className="text-blue-400 w-32 h-auto" />}
               title="Akıllı CV Analizi"
               description="Binlerce CV'yi saniyeler içinde tarayın, role en uygun adayları yüzdeler eşliğinde listeyin."
               index={1}
             />
             <FeatureCard 
-              icon={<CheckCircle2 className="text-purple-400 w-8 h-8" />}
+              icon={<CheckCircle2 className="text-purple-400 w-32 h-auto" />}
               title="Detaylı Raporlar"
               description="Mülakat sonrası yetkinlik bazlı, objektif ve veri odaklı değerlendirme raporları alın."
               index={2}
@@ -144,8 +144,8 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                      <img src="/official_hiremind_logo.png" alt="HireMind" className="w-8 h-8 object-contain" />
+                    <div className="w-32 h-auto rounded-lg flex items-center justify-center">
+                      <img src="/official_hiremind_logo.png" alt="HireMind" className="w-32 h-auto object-contain" />
                     </div>
                     <span className="text-xl font-black text-white tracking-tight">HireMind</span>
                 </div>

@@ -108,7 +108,7 @@ export default function CandidateReportPage() {
         {/* Aday bilgi kartı */}
         <div className="glass-panel p-6">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-lg font-bold shadow">
+            <div className="w-32 h-auto rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white text-lg font-bold shadow">
               {report.candidateName?.charAt(0).toUpperCase()}
             </div>
             <div>

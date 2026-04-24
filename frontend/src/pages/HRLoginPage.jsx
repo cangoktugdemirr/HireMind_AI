@@ -42,7 +42,7 @@ export default function HRLoginPage() {
 
       <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         <div className="flex flex-col items-center mb-6">
-            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-28 h-auto object-contain drop-shadow-2xl" />
+            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-56 h-auto object-contain drop-shadow-2xl" />
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-blue-500 tracking-tight">HireMind</h1>
         </div>
 
@@ -91,7 +91,7 @@ export default function HRLoginPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <EyeOff className="w-16 h-auto" /> : <Eye className="w-16 h-auto" />}
               </button>
             </div>
           </div>

@@ -47,14 +47,14 @@ export default function RegisterPage() {
       <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
-            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-28 h-auto object-contain drop-shadow-2xl" />
+            <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-56 h-auto object-contain drop-shadow-2xl" />
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300 tracking-tight">HireMind</h1>
           <p className="text-slate-400 text-sm mt-2 font-medium">Aday Kayıt Sistemi</p>
         </div>
 
         {/* Bilgilendirme */}
         <div className="flex items-center gap-3 bg-blue-500/10 border border-blue-500/20 rounded-xl px-4 py-3 mb-6">
-          <UserPlus className="w-5 h-5 text-blue-400 flex-shrink-0" />
+          <UserPlus className="w-16 h-auto text-blue-400 flex-shrink-0" />
           <p className="text-xs text-blue-300 leading-relaxed">
             Bu sayfa <strong>adaylar</strong> içindir. İK uzmanı olarak giriş yapmak için{' '}
             <Link to="/login" className="underline font-semibold text-blue-400 hover:text-blue-300">Kurumsal Giriş</Link> kullanın.
@@ -104,7 +104,7 @@ export default function RegisterPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <EyeOff className="w-16 h-auto" /> : <Eye className="w-16 h-auto" />}
               </button>
             </div>
           </div>

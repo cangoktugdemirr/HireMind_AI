@@ -39,7 +39,7 @@ export default function PortalLayout({ title, children }) {
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <img src="/official_hiremind_logo.png" alt="HireMind" className="w-5 h-5 object-contain" />
+                <img src="/official_hiremind_logo.png" alt="HireMind" className="w-16 h-auto object-contain" />
               </div>
               <span className="text-lg font-extrabold tracking-tight hidden sm:block">HireMind</span>
             </Link>
@@ -95,7 +95,7 @@ export default function PortalLayout({ title, children }) {
 
             {/* Mobile hamburger */}
             <button onClick={() => setMobileOpen(!mobileOpen)} className="md:hidden w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800 transition-all">
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileOpen ? <X className="w-16 h-auto" /> : <Menu className="w-16 h-auto" />}
             </button>
           </div>
         </div>
@@ -116,7 +116,7 @@ export default function PortalLayout({ title, children }) {
                   }`
                 }
               >
-                <item.icon className="w-5 h-5" />
+                <item.icon className="w-16 h-auto" />
                 {item.label}
               </NavLink>
             ))}
@@ -128,7 +128,7 @@ export default function PortalLayout({ title, children }) {
                 <p className="text-sm font-semibold">{user?.name}</p>
                 <p className="text-xs text-gray-400 dark:text-slate-500">{user?.role === 'hr' ? 'İK Uzmanı' : 'Aday'}</p>
               </div>
-              <button onClick={handleLogout} className="text-red-500 hover:text-red-400"><LogOut className="w-5 h-5" /></button>
+              <button onClick={handleLogout} className="text-red-500 hover:text-red-400"><LogOut className="w-16 h-auto" /></button>
             </div>
           </div>
         )}

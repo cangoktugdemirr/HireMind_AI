@@ -44,7 +44,7 @@ export default function LoginPage() {
 
       <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         <div className="flex flex-col items-center mb-8">
-          <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-40 h-auto object-contain" />
+          <img src="/official_hiremind_logo.png" alt="HireMind Logo" className="w-72 h-auto object-contain" />
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 tracking-tight">HireMind</h1>
           <p className="text-slate-400 text-sm mt-3 font-medium px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full flex items-center gap-2">
             <LogIn className="w-4 h-4 text-blue-400" /> Aday Giriş Portalı
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-200"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <EyeOff className="w-16 h-auto" /> : <Eye className="w-16 h-auto" />}
               </button>
             </div>
           </div>

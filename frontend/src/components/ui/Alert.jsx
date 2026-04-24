@@ -12,7 +12,7 @@ export default function Alert({ variant = 'info', title, children, className = '
   const { bg, text, icon: Icon, iconColor } = variants[variant];
   return (
     <div className={`flex gap-3 p-4 rounded-lg border ${bg} ${className}`}>
-      <Icon className={`w-5 h-5 mt-0.5 flex-shrink-0 ${iconColor}`} />
+      <Icon className={`w-16 h-auto mt-0.5 flex-shrink-0 ${iconColor}`} />
       <div className={text}>
         {title && <p className="font-semibold text-sm">{title}</p>}
         {children && <p className="text-sm mt-0.5">{children}</p>}
