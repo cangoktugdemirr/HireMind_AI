@@ -32,9 +32,9 @@ export default function Sidebar() {
     <aside className="fixed left-0 top-0 h-full w-64 flex flex-col bg-[var(--bg-sidebar)] border-r border-[var(--card-border)] z-30 transition-colors duration-300">
       {/* Logo */}
       <div className="flex items-center gap-3 px-6 py-6 border-b border-[var(--card-border)]">
-          <img src="/official_hiremind_logo.png" alt="HireMind" className="w-12 h-12 object-contain rounded-lg" />
+          <img src="/official_hiremind_logo.png" alt="HireMind" className="w-12 h-auto object-contain" />
         <div>
-          
+          <span className="text-lg font-extrabold text-[var(--text-primary)] tracking-tight block leading-tight">HireMind</span>
           <span className="text-[9px] text-[var(--text-muted)] font-bold uppercase tracking-[0.2em]">{user?.role === 'hr' ? 'İK Paneli' : 'Aday Portalı'}</span>
         </div>
       </div>

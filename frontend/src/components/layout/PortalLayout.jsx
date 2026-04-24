@@ -39,7 +39,7 @@ export default function PortalLayout({ title, children }) {
           <div className="flex items-center gap-6">
             <Link to="/" className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-                <img src="/official_hiremind_logo.png" alt="HireMind" className="w-12 h-12 object-contain rounded-lg" />
+                <img src="/official_hiremind_logo.png" alt="HireMind" className="w-12 h-auto object-contain" />
               </div>
               <span className="text-lg font-extrabold tracking-tight hidden sm:block">HireMind</span>
             </Link>
