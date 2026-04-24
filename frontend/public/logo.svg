@@ -1,19 +1,21 @@
-<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Dark Navy Base Color: #14213D -->
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Navy Blue: #1A263E -->
   
-  <!-- The H Character -->
-  <path d="M120 100V412M240 100V256M120 256H240" stroke="#14213D" stroke-width="70" stroke-linecap="butt"/>
-  
-  <!-- The R Character (simplified to blend) -->
-  <path d="M240 256H320C360 256 390 220 390 180C390 140 360 100 320 100H240V412M240 256L390 412" stroke="#14213D" stroke-width="70" stroke-linecap="butt" stroke-linejoin="round"/>
+  <!-- HR Blocky Shape -->
+  <path d="M100 60V240M100 150H160M160 60V240M160 150H220C260 150 290 120 290 85C290 50 260 20 220 20H160M160 150L290 280" transform="translate(0, 40)" stroke="#1A263E" stroke-width="55" stroke-linecap="butt" stroke-linejoin="miter"/>
 
-  <!-- Swoosh / Orbit -->
-  <path d="M80 350C60 420 150 460 256 460C400 460 480 380 480 300C480 200 350 150 256 150C150 150 50 220 50 300" stroke="#14213D" stroke-width="20" stroke-linecap="round" fill="none"/>
+  <!-- Swoosh Orbit -->
+  <path d="M50 250C30 280 100 295 180 290C320 280 380 220 380 150C380 80 300 35 180 40C80 45 40 100 40 150" stroke="#1A263E" stroke-width="12" stroke-linecap="round" fill="none"/>
 
-  <!-- Interview Icon (Table and Chairs) - Positioned in the middle -->
-  <g transform="translate(210, 280) scale(0.8)">
-    <rect x="25" y="40" width="50" height="8" rx="2" fill="#14213D"/> <!-- Table -->
-    <path d="M10 40H20V70M10 70H30" stroke="#14213D" stroke-width="6" stroke-linecap="round"/> <!-- Left Chair -->
-    <path d="M90 40H80V70M90 70H70" stroke="#14213D" stroke-width="6" stroke-linecap="round"/> <!-- Right Chair -->
+  <!-- Table and Chairs Icon (White to cut through or Navy on light) -->
+  <g transform="translate(135, 155) scale(0.6)" stroke="#1A263E" stroke-width="6">
+     <!-- Table -->
+     <path d="M30 40H70M50 40V65" stroke-width="8"/>
+     <!-- Left Chair -->
+     <path d="M10 40V65H30"/>
+     <path d="M10 50H25"/>
+     <!-- Right Chair -->
+     <path d="M90 40V65H70"/>
+     <path d="M90 50H75"/>
   </g>
 </svg>

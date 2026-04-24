@@ -21,31 +21,31 @@
 /* Everything uses variables. Switching the 'dark' class on <html> only changes the variables. */
 
 :root {
-  --bg-main: #f8fafc;
+  --bg-main: #fcfdfe;
   --bg-sidebar: #ffffff;
-  --bg-header: rgba(255, 255, 255, 0.85);
-  --card-bg: rgba(255, 255, 255, 0.6);
-  --card-hover-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(200, 210, 230, 0.4);
-  --text-primary: #0f172a;
+  --bg-header: rgba(255, 255, 255, 0.9);
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-hover-bg: #ffffff;
+  --card-border: rgba(26, 38, 62, 0.1);
+  --text-primary: #1a263e; /* Navy Primary */
   --text-secondary: #475569;
   --text-muted: #94a3b8;
-  --accent-blue: #14213d; /* New Navy Blue */
+  --accent-blue: #1a263e; /* Navy Primary */
   --stat-card-gradient: transparent;
 }
 
 .dark {
-  --bg-main: #02040a;
-  --bg-sidebar: #05070f;
-  --bg-header: rgba(5, 7, 15, 0.9);
-  --card-bg: rgba(20, 33, 61, 0.2);
-  --card-hover-bg: rgba(20, 33, 61, 0.4);
-  --card-border: rgba(30, 41, 59, 0.4);
+  --bg-main: #0a0e14;
+  --bg-sidebar: #0f151e;
+  --bg-header: rgba(15, 21, 30, 0.9);
+  --card-bg: rgba(26, 38, 62, 0.2);
+  --card-hover-bg: rgba(26, 38, 62, 0.35);
+  --card-border: rgba(30, 41, 59, 0.5);
   --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
+  --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --accent-blue: #60a5fa; /* Keep lighter blue for readability in dark mode */
-  --stat-card-gradient: linear-gradient(135deg, rgba(20, 33, 61, 0.4) 0%, rgba(5, 7, 15, 0.8) 100%);
+  --accent-blue: #3b82f6; /* Lighter blue for active elements in dark mode */
+  --stat-card-gradient: linear-gradient(135deg, rgba(26, 38, 62, 0.4) 0%, rgba(10, 14, 20, 0.8) 100%);
 }
 
 /* Base Component Styles */

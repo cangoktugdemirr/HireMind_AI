@@ -44,7 +44,7 @@ const LandingPage = () => {
             <Link to="/login" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors px-4">
               Giriş Yap
             </Link>
-            <Link to="/register" className="bg-[#14213d] hover:bg-[#1a2a4d] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-black/30 flex items-center gap-2 border border-white/10">
+            <Link to="/register" className="bg-[#1a263e] hover:bg-[#2a3b5e] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-black/20 flex items-center gap-2 border border-white/5">
               Kayıt Ol <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -73,7 +73,7 @@ const LandingPage = () => {
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                <Link to="/register" className="w-full sm:w-auto bg-[#14213d] hover:bg-[#1a2a4d] text-white px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-2xl shadow-black/50 flex items-center justify-center gap-3 border border-white/10">
+                <Link to="/register" className="w-full sm:w-auto bg-[#1a263e] hover:bg-[#2a3b5e] text-white px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-2xl shadow-black/40 flex items-center justify-center gap-3 border border-white/5">
                   Ücretsiz Başlayın <Zap className="w-5 h-5 fill-current" />
                 </Link>
                 <Link to="/hr-login" className="w-full sm:w-auto bg-slate-800/50 hover:bg-slate-800 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all border border-slate-700/50 flex items-center justify-center gap-3 backdrop-blur-sm">
@@ -131,7 +131,7 @@ const LandingPage = () => {
               { id: 4, title: 'Raporu İnceleyin', desc: 'Veri odaklı objektif raporları anında analiz edin.' },
             ].map((step) => (
               <div key={step.id} className="relative z-10 text-center">
-                <div className="w-20 h-20 bg-[#14213d] rounded-2xl flex items-center justify-center text-white text-3xl font-black mx-auto mb-8 shadow-xl shadow-black/20 transform hover:scale-110 transition-transform border border-white/5">
+                <div className="w-20 h-20 bg-[#1a263e] rounded-2xl flex items-center justify-center text-white text-3xl font-black mx-auto mb-8 shadow-xl shadow-black/10 transform hover:scale-110 transition-transform border border-white/5">
                   {step.id}
                 </div>
                 <h4 className="text-xl font-bold text-white mb-3 tracking-tight">{step.title}</h4>
