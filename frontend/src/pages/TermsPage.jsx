@@ -9,7 +9,7 @@ export default function TermsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20">
-              <img src="/logo_final.svg" alt="HireMind" className="w-5 h-5 object-contain" />
+              <img src="/logo.png" alt="HireMind" className="w-5 h-5 object-contain" />
             </div>
             <span className="text-lg font-black text-white tracking-tight">HireMind</span>
           </Link>
