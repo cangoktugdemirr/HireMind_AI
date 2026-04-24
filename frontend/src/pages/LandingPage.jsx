@@ -31,9 +31,7 @@ const LandingPage = () => {
       <nav className="relative z-20 border-b border-white/5 bg-[#02040a]/80 backdrop-blur-xl sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center">
-              <img src="/logo.png" alt="HireMind Logo" className="w-20 h-20 object-contain drop-shadow-xl" />
-            </div>
+            <img src="/logo.png" alt="HireMind Logo" className="w-28 h-auto object-contain" />
             <span className="text-2xl font-black text-white tracking-tight">HireMind</span>
           </div>
           <div className="hidden md:flex items-center gap-8 mr-8">
