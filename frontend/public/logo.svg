@@ -1,0 +1,15 @@
+<svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- We use currentColor or a specific Navy Blue that matches the logo -->
+  <g fill="#1A263E">
+    <!-- Thicker H and R combination -->
+    <path d="M80 80H160V190H240V80H320V320H240V190H160V320H80V80Z" fill-opacity="0.95"/>
+    
+    <!-- Table and Chairs cutout effect (actually just white shapes on top) -->
+    <rect x="180" y="210" width="40" height="6" rx="2" fill="white"/> <!-- Table -->
+    <path d="M165 210H175V240M165 240H185" stroke="white" stroke-width="6" stroke-linecap="round"/> <!-- Left Chair -->
+    <path d="M235 210H225V240M235 240H215" stroke="white" stroke-width="6" stroke-linecap="round"/> <!-- Right Chair -->
+  </g>
+
+  <!-- Orbit Line -->
+  <path d="M40 280C20 320 100 350 200 350C340 350 380 260 380 180C380 90 300 50 180 50C70 50 20 120 20 200" stroke="#1A263E" stroke-width="12" stroke-linecap="round" fill="none"/>
+</svg>
