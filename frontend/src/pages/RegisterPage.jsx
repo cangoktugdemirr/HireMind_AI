@@ -48,7 +48,7 @@ export default function RegisterPage() {
         {/* Logo */}
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 flex items-center justify-center mb-4">
-            <img src="/logo.svg" alt="HireMind Logo" className="w-20 h-20 object-contain brightness-0 invert drop-shadow-xl" />
+            <img src="/logo.png" alt="HireMind Logo" className="w-24 h-24 object-contain drop-shadow-2xl" />
           </div>
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300 tracking-tight">HireMind</h1>
           <p className="text-slate-400 text-sm mt-2 font-medium">Aday Kayıt Sistemi</p>
