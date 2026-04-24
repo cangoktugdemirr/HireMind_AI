@@ -97,7 +97,7 @@ export default function InterviewPage() {
       {/* Header */}
       <header className="bg-white dark:bg-slate-900/80 dark:backdrop-blur-md border-b border-gray-200 dark:border-slate-700/50 px-6 py-4 flex items-center justify-between transition-colors">
         <div className="flex items-center gap-3">
-            <img src="/official_hiremind_logo.png" alt="HireMind" className="w-16 h-auto object-contain" />
+            <img src="/official_hiremind_logo.png" alt="HireMind" className="w-12 h-12 object-contain rounded-lg" />
           <div>
             <h1 className="text-sm font-bold text-gray-900 dark:text-white">HireMind Mülakat</h1>
             <p className="text-xs text-gray-500 dark:text-slate-400">{interview?.jobPostingId?.title || 'Mülakat'}</p>
