@@ -85,7 +85,7 @@ export default function CandidateDashboard() {
                 <motion.div key={step.id} custom={idx} initial="hidden" animate="visible" variants={fadeUp}
                   className="flex flex-col items-center relative z-10 flex-1"
                 >
-                  <div className={`w-32 h-auto rounded-xl flex items-center justify-center transition-all duration-500 shadow-md ${
+                  <div className={`w-16 h-auto rounded-xl flex items-center justify-center transition-all duration-500 shadow-md ${
                     isActive
                       ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white ring-4 ring-blue-500/20 scale-110'
                       : isCompleted
@@ -150,7 +150,7 @@ export default function CandidateDashboard() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="glass-panel p-8">
             <div className="flex items-start gap-6">
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20">
-                <FileText className="w-32 h-auto text-white" />
+                <FileText className="w-16 h-auto text-white" />
               </div>
               <div className="flex-1">
                 <h2 className="text-xl font-extrabold mb-2">Özgeçmişinizi Oluşturun</h2>
@@ -171,7 +171,7 @@ export default function CandidateDashboard() {
               { icon: Star, label: 'Profesyonel Analiz', desc: 'Detaylı performans raporu', gradient: 'from-amber-500 to-orange-600' },
             ].map((f, idx) => (
               <motion.div key={f.label} custom={idx + 3} initial="hidden" animate="visible" variants={fadeUp} className="stat-card">
-                <div className={`w-32 h-auto rounded-xl bg-gradient-to-br ${f.gradient} flex items-center justify-center mb-3 shadow-md`}>
+                <div className={`w-16 h-auto rounded-xl bg-gradient-to-br ${f.gradient} flex items-center justify-center mb-3 shadow-md`}>
                   <f.icon className="w-16 h-auto text-white" />
                 </div>
                 <p className="text-sm font-bold text-gray-800 dark:text-white">{f.label}</p>
@@ -219,7 +219,7 @@ export default function CandidateDashboard() {
                 <motion.div key={item.label} custom={idx} initial="hidden" animate="visible" variants={fadeUp}
                   className="p-4 bg-slate-50 dark:bg-slate-900/30 rounded-xl border border-slate-100 dark:border-slate-700/30"
                 >
-                  <div className={`w-32 h-auto rounded-lg bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-2 shadow-sm`}>
+                  <div className={`w-16 h-auto rounded-lg bg-gradient-to-br ${item.gradient} flex items-center justify-center mb-2 shadow-sm`}>
                     <item.icon className="w-4 h-4 text-white" />
                   </div>
                   <p className="text-[10px] text-gray-400 dark:text-slate-500 uppercase tracking-wider font-semibold mb-1">{item.label}</p>
@@ -273,7 +273,7 @@ export default function CandidateDashboard() {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-panel p-8">
             <div className="flex items-start gap-6">
               <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-blue-500/20 animate-pulse">
-                <Briefcase className="w-32 h-auto text-white" />
+                <Briefcase className="w-16 h-auto text-white" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-3">
@@ -339,7 +339,7 @@ export default function CandidateDashboard() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="glass-panel p-8">
           <div className="flex items-start gap-6">
             <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/20">
-              <CheckCircle className="w-32 h-auto text-white" />
+              <CheckCircle className="w-16 h-auto text-white" />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-3">

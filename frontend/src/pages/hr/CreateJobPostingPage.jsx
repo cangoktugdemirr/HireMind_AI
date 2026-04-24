@@ -44,7 +44,7 @@ export default function CreateJobPostingPage() {
         {/* Sol Taraf: Form */}
         <div className="xl:col-span-2 space-y-6">
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-32 h-auto rounded-lg bg-blue-500/10 flex items-center justify-center">
+            <div className="w-16 h-auto rounded-lg bg-blue-500/10 flex items-center justify-center">
               <Briefcase className="w-4 h-4 text-blue-500" />
             </div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">İlan Detayları</h2>
@@ -115,7 +115,7 @@ export default function CreateJobPostingPage() {
         <div className="hidden xl:block xl:col-span-1">
           <div className="sticky top-6">
             <div className="flex items-center gap-2 mb-6">
-              <div className="w-32 h-auto rounded-lg bg-amber-500/10 flex items-center justify-center">
+              <div className="w-16 h-auto rounded-lg bg-amber-500/10 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-amber-500" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">Canlı Önizleme</h2>
@@ -132,7 +132,7 @@ export default function CreateJobPostingPage() {
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-32 h-auto bg-gradient-to-br from-blue-100 to-blue-50 dark:from-slate-700 dark:to-slate-600 rounded-xl flex items-center justify-center shadow-inner border border-white/20 dark:border-slate-500/20">
+                    <div className="w-16 h-auto bg-gradient-to-br from-blue-100 to-blue-50 dark:from-slate-700 dark:to-slate-600 rounded-xl flex items-center justify-center shadow-inner border border-white/20 dark:border-slate-500/20">
                       <Building2 className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
@@ -215,7 +215,7 @@ export default function CreateJobPostingPage() {
       <Modal isOpen={resultModal} onClose={() => {}} title="">
         <div className="flex flex-col items-center text-center py-4">
           <div className="w-20 h-20 bg-green-100 dark:bg-green-500/20 rounded-3xl flex items-center justify-center mb-5 border border-green-200 dark:border-green-500/30 shadow-inner">
-            <CheckCircle className="w-32 h-auto text-green-600 dark:text-green-400" />
+            <CheckCircle className="w-16 h-auto text-green-600 dark:text-green-400" />
           </div>
           <h2 className="text-xl font-black text-gray-900 dark:text-white mb-2">Başarıyla Yayınlandı!</h2>
           <p className="text-base text-gray-500 dark:text-slate-400 mb-2">

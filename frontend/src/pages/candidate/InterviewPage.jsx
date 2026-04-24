@@ -97,7 +97,7 @@ export default function InterviewPage() {
       {/* Header */}
       <header className="bg-white dark:bg-slate-900/80 dark:backdrop-blur-md border-b border-gray-200 dark:border-slate-700/50 px-6 py-4 flex items-center justify-between transition-colors">
         <div className="flex items-center gap-3">
-            <img src="/official_hiremind_logo.png" alt="HireMind" className="w-32 h-auto object-contain" />
+            <img src="/official_hiremind_logo.png" alt="HireMind" className="w-16 h-auto object-contain" />
           <div>
             <h1 className="text-sm font-bold text-gray-900 dark:text-white">HireMind Mülakat</h1>
             <p className="text-xs text-gray-500 dark:text-slate-400">{interview?.jobPostingId?.title || 'Mülakat'}</p>
@@ -132,7 +132,7 @@ export default function InterviewPage() {
           <div className="glass-panel p-6 flex-1 flex flex-col">
             {/* Soru numarası ve kategori */}
             <div className="flex items-center gap-3 mb-5">
-              <span className="inline-flex items-center justify-center w-32 h-auto rounded-xl bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-bold border border-blue-500/20">
+              <span className="inline-flex items-center justify-center w-16 h-auto rounded-xl bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 text-sm font-bold border border-blue-500/20">
                 {currentIdx + 1}
               </span>
               <span className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider">

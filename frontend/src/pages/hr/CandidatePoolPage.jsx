@@ -75,7 +75,7 @@ export default function CandidatePoolPage() {
                 className="glass-panel p-6 group hover:border-blue-500/50 transition-all cursor-pointer"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-32 h-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-500/20">
+                  <div className="w-16 h-auto rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-lg shadow-blue-500/20">
                     {c.fullName.charAt(0)}
                   </div>
                   <div className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${

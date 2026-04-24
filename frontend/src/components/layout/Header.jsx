@@ -51,7 +51,7 @@ export default function Header({ title }) {
               </div>
               <div className="max-h-[300px] overflow-y-auto">
                 <div className="p-4 border-b border-gray-50 dark:border-slate-700/50 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors cursor-pointer flex gap-3">
-                  <div className="mt-0.5 w-32 h-auto rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                  <div className="mt-0.5 w-16 h-auto rounded-full bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center flex-shrink-0">
                     <Info className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
@@ -61,7 +61,7 @@ export default function Header({ title }) {
                   </div>
                 </div>
                 <div className="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-colors cursor-pointer flex gap-3">
-                  <div className="mt-0.5 w-32 h-auto rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                  <div className="mt-0.5 w-16 h-auto rounded-full bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
                     <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   <div>
