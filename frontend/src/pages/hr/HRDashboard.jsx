@@ -17,6 +17,7 @@ const fadeUp = {
 export default function HRDashboard() {
   const [jobPostings, setJobPostings] = useState([]);
   const [dashboardStats, setDashboardStats] = useState({ upcomingInterviews: [], recentActivities: [] });
+  const [recentCVs, setRecentCVs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
@@ -25,12 +26,14 @@ export default function HRDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [jobsRes, statsRes] = await Promise.all([
+        const [jobsRes, statsRes, cvRes] = await Promise.all([
           api.get('/jobpostings'),
-          api.get('/jobpostings/dashboard-stats')
+          api.get('/jobpostings/dashboard-stats'),
+          api.get('/cv')
         ]);
         setJobPostings(jobsRes.data.jobPostings || []);
         setDashboardStats(statsRes.data || { upcomingInterviews: [], recentActivities: [] });
+        setRecentCVs(cvRes.data.cvs?.slice(0, 5) || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -343,7 +346,7 @@ export default function HRDashboard() {
                  </div>
                  <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Aktiviteler</h3>
              </div>
-             <div className="space-y-6 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 dark:before:via-slate-700 before:to-transparent min-h-[250px]">
+             <div className="space-y-6 relative ml-1 min-h-[250px]">
                 {dashboardStats.recentActivities.length === 0 ? (
                   <div className="py-10 text-center opacity-40">
                     <p className="text-sm">Henüz aktivite bulunmuyor</p>
@@ -356,11 +359,11 @@ export default function HRDashboard() {
                     };
                     const config = icons[act.type] || { icon: Activity, color: 'text-blue-500', bg: 'bg-blue-100' };
                     return (
-                      <div key={act.id} className="relative flex items-center justify-between md:justify-normal group is-active">
-                          <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${config.bg} shadow shrink-0 z-10 mr-4`}>
+                      <div key={act.id} className="relative flex items-center gap-4 group">
+                          <div className={`flex items-center justify-center w-8 h-8 rounded-full border border-white dark:border-slate-800 ${config.bg} shadow shrink-0 z-10`}>
                               <config.icon className={`w-4 h-4 ${config.color}`} />
                           </div>
-                          <div className="flex-1 bg-gray-50 dark:bg-slate-800/40 p-4 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
+                          <div className="flex-1 bg-gray-50 dark:bg-slate-800/40 p-3 rounded-xl border border-gray-100 dark:border-slate-700/50 hover:border-gray-200 dark:hover:border-slate-600 transition-colors">
                               <div className="flex items-center justify-between mb-1">
                                   <span className="font-bold text-sm text-gray-900 dark:text-white">{act.title}</span>
                                   <span className="text-[10px] text-gray-400 font-semibold">{new Date(act.time).toLocaleDateString('tr-TR')}</span>
@@ -370,10 +373,48 @@ export default function HRDashboard() {
                       </div>
                     );
                   })
-                )}
+                ) }
              </div>
         </motion.div>
       </div>
+
+      {/* Son Başvuranlar (YENİ EKLEDİĞİMİZ KISIM - OTOMATİK SENKRONİZE ÇALIŞIR) */}
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }} className="glass-panel overflow-hidden mb-10">
+        <div className="px-6 py-5 border-b border-gray-100 dark:border-slate-800/60 flex items-center justify-between">
+           <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg">
+                <Users className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900 dark:text-white">Son Başvuran Adaylar</h3>
+                <p className="text-xs text-gray-400 dark:text-slate-500">Sisteme yeni düşen tüm aday profilleri</p>
+              </div>
+           </div>
+           <button onClick={() => navigate('/hr/candidates')} className="text-xs font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest hover:underline">Aday Havuzuna Git</button>
+        </div>
+        <div className="divide-y divide-gray-50 dark:divide-slate-800/40">
+           {recentCVs.length === 0 ? (
+             <div className="p-12 text-center opacity-40 italic text-sm">Henüz yeni bir aday başvurusu bulunmuyor.</div>
+           ) : (
+             recentCVs.map((cv) => (
+               <div key={cv._id} className="p-5 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-800/40 transition-colors">
+                  <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400 font-bold">
+                       {cv.fullName?.charAt(0)}
+                     </div>
+                     <div>
+                       <p className="text-sm font-bold text-gray-900 dark:text-white">{cv.fullName}</p>
+                       <p className="text-xs text-gray-400 dark:text-slate-500">{cv.experienceLevel} - {cv.schoolDepartment}</p>
+                     </div>
+                  </div>
+                  <div className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${cv.isMatched ? 'bg-emerald-100 text-emerald-600 dark:bg-emerald-500/10' : 'bg-amber-100 text-amber-600 dark:bg-amber-500/10'}`}>
+                    {cv.isMatched ? 'Eşleşti' : 'İnceleniyor'}
+                  </div>
+               </div>
+             ))
+           )}
+        </div>
+      </motion.div>
 
       {/* Quick Actions */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
