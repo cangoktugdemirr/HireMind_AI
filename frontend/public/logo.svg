@@ -1,6 +1,15 @@
 <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="128" fill="#2563EB"/>
-  <path d="M160 160V352M352 160V352M160 256H352" stroke="white" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="352" cy="160" r="40" fill="#60A5FA" stroke="white" stroke-width="8"/>
-  <path d="M352 160C380 160 400 180 400 208C400 236 380 256 352 256" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <!-- Modern Geometric H with AI connection dots -->
+  <path d="M160 120V392M352 120V392M160 256H352" stroke="#60A5FA" stroke-width="45" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- AI Nodes -->
+  <circle cx="160" cy="120" r="32" fill="#2563EB" stroke="white" stroke-width="8"/>
+  <circle cx="352" cy="120" r="32" fill="#2563EB" stroke="white" stroke-width="8"/>
+  <circle cx="160" cy="392" r="32" fill="#2563EB" stroke="white" stroke-width="8"/>
+  <circle cx="352" cy="392" r="32" fill="#2563EB" stroke="white" stroke-width="8"/>
+  
+  <!-- Center Glow -->
+  <circle cx="256" cy="256" r="16" fill="white shadow-lg">
+    <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+  </circle>
 </svg>
