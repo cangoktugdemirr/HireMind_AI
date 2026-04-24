@@ -82,57 +82,40 @@ export default function HRDashboard() {
 
   return (
     <DashboardLayout title="İK Yönetim Paneli">
-      {/* Welcome Banner */}
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 p-7 shadow-xl shadow-blue-500/10"
-      >
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-          <div className="absolute -left-8 -bottom-8 w-48 h-48 rounded-full bg-cyan-400/10 blur-3xl"></div>
+      {/* Page Header */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <h2 className="text-2xl font-black text-gray-900 dark:text-white tracking-tight flex items-center gap-3">
+            Hoş geldin, {user?.name || 'İK Uzmanı'} 👋
+          </h2>
+          <p className="text-sm text-gray-500 dark:text-slate-500 font-medium mt-1">İş alım süreçlerinizi ve aday performanslarını buradan takip edin.</p>
         </div>
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
-              Hoş geldin, {user?.name || 'İK Uzmanı'} 👋
-            </h2>
-            <p className="text-blue-100/90 text-sm max-w-lg font-medium leading-relaxed">
-              İlanlarınızı yönetin, adayları takip edin ve mülakat süreçlerini analiz edin.
-            </p>
-          </div>
-          <div className="flex gap-4">
-             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px]">
-                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Görüşülecek</p>
-                 <p className="text-3xl font-black">{statsData.pendingCount}</p>
-             </div>
-             <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px] hidden lg:block">
-                 <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Yeni Eşleşme</p>
-                 <p className="text-3xl font-black text-amber-300">
-                    {dashboardStats.recentActivities.filter(a => a.type === 'matched').length} Yeni
-                 </p>
-             </div>
-          </div>
+        <div className="flex items-center gap-3">
+          <Button onClick={() => navigate('/hr/create-job')} className="!bg-blue-600 hover:!bg-blue-500 shadow-lg shadow-blue-500/20 py-2.5 rounded-xl font-bold">
+            <PlusCircle className="w-4 h-4 mr-2" /> Yeni İlan Yayınla
+          </Button>
         </div>
-      </motion.div>
+      </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
-        {stats.map((s, i) => (
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-10">
+        {[
+          { label: 'Aktif İlan', value: statsData.totalPostings, icon: Briefcase, color: 'text-blue-600', bg: 'bg-blue-500/10', trend: '+' + statsData.totalPostings },
+          { label: 'Eşleşmiş Aday', value: statsData.totalCandidates, icon: Users, color: 'text-violet-600', bg: 'bg-violet-500/10', trend: statsData.totalPoolCandidates + ' havuz' },
+          { label: 'Görüşülecek', value: statsData.pendingCount, icon: Clock, color: 'text-amber-600', bg: 'bg-amber-500/10', trend: 'Mülakat bekleyen' },
+          { label: 'Tamamlanan', value: statsData.completedCount, icon: CheckCircle, color: 'text-emerald-600', bg: 'bg-emerald-500/10', trend: completionRate + '% oran' },
+        ].map((s, i) => (
           <motion.div key={s.label} custom={i} initial="hidden" animate="visible" variants={fadeUp}
-            className="stat-card group cursor-default"
+            className="glass-panel p-6 group hover:border-blue-500/40 transition-all cursor-default"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${s.gradient} flex items-center justify-center shadow-md`}>
-                <s.icon className="w-5 h-5 text-white" />
+            <div className="flex items-start justify-between mb-4">
+              <div className={`w-12 h-12 rounded-2xl ${s.bg} flex items-center justify-center`}>
+                <s.icon className={`w-6 h-6 ${s.color}`} />
               </div>
-              <span className={`text-xs font-bold flex items-center gap-1 ${s.up ? 'text-emerald-500' : 'text-red-400'}`}>
-                {s.up ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
-                {s.change}
-              </span>
+              <div className="text-[10px] font-black text-gray-400 dark:text-slate-600 uppercase tracking-widest">{s.trend}</div>
             </div>
-            <p className="text-3xl font-black tracking-tight">{s.value}</p>
-            <p className="text-sm opacity-70 font-medium mt-1">{s.label}</p>
+            <p className="text-3xl font-black text-gray-900 dark:text-white tracking-tighter">{s.value}</p>
+            <p className="text-xs font-bold text-gray-500 dark:text-slate-500 uppercase tracking-wider mt-1">{s.label}</p>
           </motion.div>
         ))}
       </div>
