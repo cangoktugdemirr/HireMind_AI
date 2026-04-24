@@ -107,6 +107,7 @@ router.get('/dashboard-stats', auth, requireRole('hr'), async (req, res) => {
   try {
     const postings = await JobPosting.find({ hrUserId: req.user.id });
     const jobIds = postings.map(p => p._id);
+    const totalPostings = postings.length;
 
     // Tüm mülakatları getir
     const interviews = await Interview.find({ jobPostingId: { $in: jobIds } })
@@ -115,22 +116,28 @@ router.get('/dashboard-stats', auth, requireRole('hr'), async (req, res) => {
       .sort({ createdAt: -1 })
       .lean();
 
+    // İstatistikler için sayıları hesapla
+    const completedCount = interviews.filter(i => i.status === 'completed').length;
+    const pendingCount = interviews.filter(i => i.status === 'pending' || i.status === 'in_progress').length;
+    
+    // Toplam Aday: Sisteme kayıtlı ve mülakatı olan benzersiz aday sayısı
+    const uniqueCandidates = new Set(interviews.map(i => i.candidateId?._id?.toString())).size;
+    const totalAvailableCandidates = await CV.countDocuments(); // Havuzdaki toplam CV sayısı
+
     // Yaklaşan mülakatlar (bekleyen veya devam eden)
     const upcomingInterviews = interviews
       .filter(i => i.status === 'pending' || i.status === 'in_progress')
-      .slice(0, 5) // En fazla 5 tane göster
+      .slice(0, 5)
       .map(i => ({
         _id: i._id,
         candidateName: i.candidateId?.name || 'Bilinmiyor',
         jobTitle: i.jobPostingId?.title || 'Bilinmiyor',
         status: i.status === 'pending' ? 'Bekliyor' : 'Devam Ediyor',
-        date: i.createdAt // Başlama tarihi vs. de eklenebilir
+        date: i.createdAt
       }));
 
-    // Son aktiviteler (Tamamlananlar veya yeni eşleşmeler)
-    // Aktivite akışı için mülakatları statülerine göre sıralayıp mix ediyoruz
+    // Son aktiviteler
     const recentActivities = [];
-    
     interviews.slice(0, 10).forEach(i => {
       if (i.status === 'completed') {
         recentActivities.push({
@@ -151,12 +158,18 @@ router.get('/dashboard-stats', auth, requireRole('hr'), async (req, res) => {
       }
     });
 
-    // Zamana göre sırala (en güncel en üstte)
     recentActivities.sort((a, b) => new Date(b.time) - new Date(a.time));
 
     res.json({
+      stats: {
+        totalPostings,
+        totalCandidates: uniqueCandidates,
+        totalPoolCandidates: totalAvailableCandidates,
+        completedCount,
+        pendingCount
+      },
       upcomingInterviews,
-      recentActivities: recentActivities.slice(0, 5) // Son 5 aktivite
+      recentActivities: recentActivities.slice(0, 5)
     });
 
   } catch (err) {

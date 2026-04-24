@@ -40,10 +40,8 @@ export default function HRDashboard() {
     fetchData();
   }, []);
 
-  const totalCandidates = jobPostings.reduce((s, p) => s + p.totalCandidates, 0);
-  const totalCompleted = jobPostings.reduce((s, p) => s + p.completedCount, 0);
-  const totalPending = totalCandidates - totalCompleted;
-  const completionRate = totalCandidates > 0 ? Math.round((totalCompleted / totalCandidates) * 100) : 0;
+  const statsData = dashboardStats.stats || { totalPostings: 0, totalCandidates: 0, completedCount: 0, pendingCount: 0, totalPoolCandidates: 0 };
+  const completionRate = statsData.totalCandidates > 0 ? Math.round((statsData.completedCount / statsData.totalCandidates) * 100) : 0;
 
   const filteredPostings = jobPostings.filter(p =>
     p.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -63,23 +61,23 @@ export default function HRDashboard() {
   }
 
   const chartData = [
-    { name: 'Tamamlanan', value: totalCompleted || 0, color: '#10B981' },
-    { name: 'Bekleyen', value: totalPending || 0, color: '#F59E0B' }
+    { name: 'Tamamlanan', value: statsData.completedCount || 0, color: '#10B981' },
+    { name: 'Bekleyen', value: statsData.pendingCount || 0, color: '#F59E0B' }
   ];
 
   const weeklyTrend = [
-    { day: 'Pzt', val: Math.max(1, Math.floor(totalCompleted * 0.1)) },
-    { day: 'Sal', val: Math.max(2, Math.floor(totalCompleted * 0.15)) },
-    { day: 'Çar', val: Math.max(3, Math.floor(totalCompleted * 0.25)) },
-    { day: 'Per', val: Math.max(2, Math.floor(totalCompleted * 0.2)) },
-    { day: 'Cum', val: Math.max(4, Math.floor(totalCompleted * 0.3)) },
+    { day: 'Pzt', val: Math.max(1, Math.floor(statsData.completedCount * 0.1)) },
+    { day: 'Sal', val: Math.max(2, Math.floor(statsData.completedCount * 0.15)) },
+    { day: 'Çar', val: Math.max(3, Math.floor(statsData.completedCount * 0.25)) },
+    { day: 'Per', val: Math.max(2, Math.floor(statsData.completedCount * 0.2)) },
+    { day: 'Cum', val: Math.max(4, Math.floor(statsData.completedCount * 0.3)) },
   ];
 
   const stats = [
-    { label: 'Toplam İlan', value: jobPostings.length, icon: Briefcase, gradient: 'from-blue-500 to-blue-600', change: '+' + jobPostings.length, up: true },
-    { label: 'Toplam Aday', value: totalCandidates, icon: Users, gradient: 'from-violet-500 to-purple-600', change: '+' + totalCandidates, up: true },
-    { label: 'Tamamlanan', value: totalCompleted, icon: CheckCircle, gradient: 'from-emerald-500 to-green-600', change: completionRate + '%', up: completionRate >= 50 },
-    { label: 'Bekleyen', value: totalPending, icon: Clock, gradient: 'from-amber-500 to-orange-600', change: totalPending + ' kişi', up: totalPending <= 5 },
+    { label: 'Aktif İlan', value: statsData.totalPostings, icon: Briefcase, gradient: 'from-blue-500 to-blue-600', change: '+' + statsData.totalPostings, up: true },
+    { label: 'Eşleşen Aday', value: statsData.totalCandidates, icon: Users, gradient: 'from-violet-500 to-purple-600', change: '+' + statsData.totalCandidates, up: true },
+    { label: 'Tamamlanan', value: statsData.completedCount, icon: CheckCircle, gradient: 'from-emerald-500 to-green-600', change: completionRate + '%', up: completionRate >= 50 },
+    { label: 'Bekleyen', value: statsData.pendingCount, icon: Clock, gradient: 'from-amber-500 to-orange-600', change: statsData.pendingCount + ' kişi', up: statsData.pendingCount <= 5 },
   ];
 
   return (
@@ -97,7 +95,7 @@ export default function HRDashboard() {
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-2">
-              Hoş geldin, {user?.name?.split(' (')[0] || 'İK Uzmanı'} 👋
+              Hoş geldin, {user?.name || 'İK Uzmanı'} 👋
             </h2>
             <p className="text-blue-100/90 text-sm max-w-lg font-medium leading-relaxed">
               İlanlarınızı yönetin, adayları takip edin ve mülakat süreçlerini analiz edin.
@@ -106,11 +104,13 @@ export default function HRDashboard() {
           <div className="flex gap-4">
              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px]">
                  <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Görüşülecek</p>
-                 <p className="text-3xl font-black">{dashboardStats.upcomingInterviews.length}</p>
+                 <p className="text-3xl font-black">{statsData.pendingCount}</p>
              </div>
              <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/10 text-white min-w-[140px] hidden lg:block">
                  <p className="text-xs text-blue-100 uppercase tracking-wider font-bold mb-1">Yeni Eşleşme</p>
-                 <p className="text-3xl font-black text-amber-300">{dashboardStats.recentActivities.filter(a => a.type === 'matched').length} Yeni</p>
+                 <p className="text-3xl font-black text-amber-300">
+                    {dashboardStats.recentActivities.filter(a => a.type === 'matched').length} Yeni
+                 </p>
              </div>
           </div>
         </div>
@@ -321,7 +321,7 @@ export default function HRDashboard() {
                 </div>
                 <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold cursor-pointer">Tümünü Gör</span>
              </div>
-             <div className="divide-y divide-gray-50 dark:border-gray-100 dark:divide-slate-800/40 min-h-[300px]">
+             <div className="divide-y divide-gray-50 dark:divide-slate-800/40 min-h-[300px]">
                 {dashboardStats.upcomingInterviews.length === 0 ? (
                   <div className="p-10 text-center opacity-40">
                     <p className="text-sm">Henüz bekleyen mülakat yok</p>
@@ -390,8 +390,6 @@ export default function HRDashboard() {
                 )}
              </div>
         </motion.div>
-             </div>
-        </motion.div>
       </div>
 
       {/* Quick Actions */}
@@ -400,7 +398,7 @@ export default function HRDashboard() {
       >
         {[
           { label: 'İlanları Yönet', desc: 'Aktif ilanları düzenleyin', icon: Briefcase, gradient: 'from-blue-500 to-blue-600', onClick: () => window.scrollTo({ top: 400, behavior: 'smooth' }) },
-          { label: 'Aday Havuzu', desc: 'Tüm adayları inceleyin', icon: Users, gradient: 'from-violet-500 to-purple-600', onClick: () => {} },
+          { label: 'Aday Havuzu', desc: 'Tüm adayları inceleyin', icon: Users, gradient: 'from-violet-500 to-purple-600', onClick: () => navigate('/hr/candidates') },
           { label: 'Performans Raporu', desc: 'Analiz ve istatistikler', icon: BarChart3, gradient: 'from-emerald-500 to-green-600', onClick: () => {} },
         ].map((a) => (
           <div key={a.label} onClick={a.onClick}

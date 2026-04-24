@@ -14,6 +14,8 @@ import HRDashboard from './pages/hr/HRDashboard';
 import CreateJobPostingPage from './pages/hr/CreateJobPostingPage';
 import JobPostingDetailPage from './pages/hr/JobPostingDetailPage';
 import CandidateReportPage from './pages/hr/CandidateReportPage';
+import HRSettingsPage from './pages/hr/HRSettingsPage';
+import CandidatePoolPage from './pages/hr/CandidatePoolPage';
 import FakeAdminPage from './pages/FakeAdminPage';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
@@ -66,6 +68,12 @@ const AppRoutes = () => (
     } />
     <Route path="/hr/report/:interviewId" element={
       <ProtectedRoute role="hr"><CandidateReportPage /></ProtectedRoute>
+    } />
+    <Route path="/hr/settings" element={
+      <ProtectedRoute role="hr"><HRSettingsPage /></ProtectedRoute>
+    } />
+    <Route path="/hr/candidates" element={
+      <ProtectedRoute role="hr"><CandidatePoolPage /></ProtectedRoute>
     } />
 
     <Route path="*" element={<Navigate to="/" replace />} />

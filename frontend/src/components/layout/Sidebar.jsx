@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FileText, PlusCircle, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, PlusCircle, LogOut, Users, Settings } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const NavItem = ({ to, icon: Icon, label }) => (
@@ -53,21 +53,16 @@ export default function Sidebar() {
           <>
             <NavItem to="/hr/dashboard" icon={LayoutDashboard} label="Panelim" />
             <NavItem to="/hr/create-job" icon={PlusCircle} label="Yeni İlan Oluştur" />
+            <NavItem to="/hr/candidates" icon={Users} label="Aday Havuzu" />
+            <div className="pt-2 mt-2 border-t border-gray-100 dark:border-slate-800/40">
+              <NavItem to="/hr/settings" icon={Settings} label="Ayarlar" />
+            </div>
           </>
         )}
       </nav>
 
-      {/* User */}
-      <div className="px-3 pb-6 border-t border-gray-100 dark:border-slate-800/60 pt-5">
-        <div className="flex items-center gap-3 px-3 py-3 mb-3 bg-gray-50 dark:bg-slate-800/30 rounded-xl border border-gray-100 dark:border-slate-700/30">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 to-blue-500 flex items-center justify-center text-white text-sm font-bold shadow-lg shadow-violet-500/20 flex-shrink-0">
-            {user?.name?.charAt(0).toUpperCase()}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-gray-800 dark:text-slate-100 text-sm font-semibold truncate">{user?.name}</p>
-            <p className="text-gray-400 dark:text-slate-500 text-xs font-medium">{user?.role === 'hr' ? 'İK Uzmanı' : 'Aday'}</p>
-          </div>
-        </div>
+      {/* Logout Action */}
+      <div className="px-3 pb-6 mt-auto">
         <button
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 border border-transparent transition-all"

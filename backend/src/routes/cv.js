@@ -90,6 +90,17 @@ router.get('/me', auth, requireRole('candidate'), async (req, res) => {
   }
 });
 
+// GET /api/cv — HR tüm aday havuzunu görür
+router.get('/', auth, requireRole('hr'), async (req, res) => {
+  try {
+    const cvs = await CV.find().sort({ createdAt: -1 });
+    res.json({ cvs });
+  } catch (err) {
+    console.error('Aday havuzu hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası' });
+  }
+});
+
 // GET /api/cv/:id — HR adayın CV'sini getirir
 router.get('/:id', auth, requireRole('hr'), async (req, res) => {
   try {

@@ -75,4 +75,31 @@ router.post('/login', async (req, res) => {
   }
 });
 
+const { auth } = require('../middleware/auth');
+
+// POST /api/auth/change-password
+router.post('/change-password', auth, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ message: 'Mevcut şifre ve yeni şifre zorunludur' });
+    }
+
+    const user = await User.findById(req.user.id);
+    const match = await bcrypt.compare(currentPassword, user.password);
+    if (!match) {
+      return res.status(401).json({ message: 'Mevcut şifre hatalı' });
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+    user.password = hashed;
+    await user.save();
+
+    res.json({ message: 'Şifre başarıyla güncellendi' });
+  } catch (err) {
+    console.error('Şifre değiştirme hatası:', err);
+    res.status(500).json({ message: 'Sunucu hatası: ' + err.message });
+  }
+});
+
 module.exports = router;
