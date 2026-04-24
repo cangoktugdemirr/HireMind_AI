@@ -1,17 +1,6 @@
-<svg width="32" height="32" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Favicon: Sadeleştirilmiş HR logosu -->
-  
-  <!-- H Harfi -->
-  <rect x="80" y="120" width="46" height="272" fill="#162544"/>
-  <rect x="175" y="120" width="46" height="272" fill="#162544"/>
-  <rect x="80" y="232" width="141" height="46" fill="#162544"/>
-
-  <!-- R Harfi -->
-  <rect x="268" y="120" width="46" height="272" fill="#162544"/>
-  <path d="M268 120 L268 160 L345 160 Q388 160 388 200 Q388 240 345 240 L268 240 L268 120 L345 120 Q400 120 400 196 Q400 240 345 240" fill="#162544"/>
-  <polygon points="306,240 340,240 405,392 371,392" fill="#162544"/>
-
-  <!-- Orbital swoosh -->
-  <path d="M 30 215 Q 60 125, 180 110 Q 256 98, 360 115 Q 465 135, 490 215" 
-        stroke="#162544" stroke-width="16" fill="none" stroke-linecap="round"/>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="128" fill="#2563EB"/>
+  <path d="M160 160V352M352 160V352M160 256H352" stroke="white" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="352" cy="160" r="40" fill="#60A5FA" stroke="white" stroke-width="8"/>
+  <path d="M352 160C380 160 400 180 400 208C400 236 380 256 352 256" stroke="white" stroke-width="12" stroke-linecap="round"/>
 </svg>
