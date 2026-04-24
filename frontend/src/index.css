@@ -30,22 +30,22 @@
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #94a3b8;
-  --accent-blue: #2563eb;
+  --accent-blue: #14213d; /* New Navy Blue */
   --stat-card-gradient: transparent;
 }
 
 .dark {
-  --bg-main: #060910;
-  --bg-sidebar: #0a0e1a;
-  --bg-header: rgba(10, 14, 26, 0.9);
-  --card-bg: rgba(30, 41, 59, 0.4);
-  --card-hover-bg: rgba(30, 41, 59, 0.6);
-  --card-border: rgba(51, 65, 85, 0.4);
+  --bg-main: #02040a;
+  --bg-sidebar: #05070f;
+  --bg-header: rgba(5, 7, 15, 0.9);
+  --card-bg: rgba(20, 33, 61, 0.2);
+  --card-hover-bg: rgba(20, 33, 61, 0.4);
+  --card-border: rgba(30, 41, 59, 0.4);
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
   --text-muted: #64748b;
-  --accent-blue: #60a5fa;
-  --stat-card-gradient: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.8) 100%);
+  --accent-blue: #60a5fa; /* Keep lighter blue for readability in dark mode */
+  --stat-card-gradient: linear-gradient(135deg, rgba(20, 33, 61, 0.4) 0%, rgba(5, 7, 15, 0.8) 100%);
 }
 
 /* Base Component Styles */

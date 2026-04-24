@@ -19,16 +19,16 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#060910] text-slate-100 overflow-x-hidden relative font-sans">
+    <div className="min-h-screen bg-[#02040a] text-slate-100 overflow-x-hidden relative font-sans">
       {/* Refined Background decoration - No more blocky UI */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute -top-[10%] -left-[5%] w-[500px] h-[500px] bg-blue-600/10 blur-[150px] rounded-full"></div>
+        <div className="absolute -top-[10%] -left-[5%] w-[500px] h-[500px] bg-[#14213d]/20 blur-[150px] rounded-full"></div>
         <div className="absolute top-[20%] -right-[5%] w-[400px] h-[400px] bg-purple-600/10 blur-[150px] rounded-full"></div>
         <div className="absolute bottom-[10%] left-[20%] w-[600px] h-[600px] bg-cyan-600/5 blur-[180px] rounded-full"></div>
       </div>
 
       {/* Navbar */}
-      <nav className="relative z-20 border-b border-white/5 bg-[#060910]/80 backdrop-blur-xl sticky top-0">
+      <nav className="relative z-20 border-b border-white/5 bg-[#02040a]/80 backdrop-blur-xl sticky top-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center">
@@ -44,7 +44,7 @@ const LandingPage = () => {
             <Link to="/login" className="text-sm font-semibold text-slate-300 hover:text-white transition-colors px-4">
               Giriş Yap
             </Link>
-            <Link to="/register" className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-blue-600/30 flex items-center gap-2">
+            <Link to="/register" className="bg-[#14213d] hover:bg-[#1a2a4d] text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-black/30 flex items-center gap-2 border border-white/10">
               Kayıt Ol <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
@@ -73,7 +73,7 @@ const LandingPage = () => {
               </motion.p>
 
               <motion.div variants={fadeIn} className="flex flex-col sm:flex-row items-center justify-center gap-5">
-                <Link to="/register" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-xl shadow-blue-600/40 flex items-center justify-center gap-3">
+                <Link to="/register" className="w-full sm:w-auto bg-[#14213d] hover:bg-[#1a2a4d] text-white px-10 py-5 rounded-2xl font-black text-lg transition-all shadow-2xl shadow-black/50 flex items-center justify-center gap-3 border border-white/10">
                   Ücretsiz Başlayın <Zap className="w-5 h-5 fill-current" />
                 </Link>
                 <Link to="/hr-login" className="w-full sm:w-auto bg-slate-800/50 hover:bg-slate-800 text-white px-10 py-5 rounded-2xl font-black text-lg transition-all border border-slate-700/50 flex items-center justify-center gap-3 backdrop-blur-sm">
@@ -131,7 +131,7 @@ const LandingPage = () => {
               { id: 4, title: 'Raporu İnceleyin', desc: 'Veri odaklı objektif raporları anında analiz edin.' },
             ].map((step) => (
               <div key={step.id} className="relative z-10 text-center">
-                <div className="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-3xl font-black mx-auto mb-8 shadow-xl shadow-blue-500/20 transform hover:scale-110 transition-transform">
+                <div className="w-20 h-20 bg-[#14213d] rounded-2xl flex items-center justify-center text-white text-3xl font-black mx-auto mb-8 shadow-xl shadow-black/20 transform hover:scale-110 transition-transform border border-white/5">
                   {step.id}
                 </div>
                 <h4 className="text-xl font-bold text-white mb-3 tracking-tight">{step.title}</h4>
