@@ -244,7 +244,7 @@ export default function HRDashboard() {
               </div>
               <h3 className="text-sm font-bold text-gray-800 dark:text-white uppercase tracking-wider">Süreç Analizi</h3>
             </div>
-            {totalCandidates > 0 ? (
+            {statsData.totalCandidates > 0 ? (
               <div className="flex flex-col items-center">
                 <div className="relative">
                   <ResponsiveContainer width={180} height={180}>
