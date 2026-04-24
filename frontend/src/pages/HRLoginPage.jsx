@@ -43,7 +43,7 @@ export default function HRLoginPage() {
       <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         <div className="flex flex-col items-center mb-6">
           <div className="w-16 h-16 flex items-center justify-center mb-4">
-            <img src="/logo.svg" alt="HireMind Logo" className="w-20 h-20 object-contain brightness-0 invert drop-shadow-xl" />
+            <img src="/logo.png" alt="HireMind Logo" className="w-24 h-24 object-contain drop-shadow-2xl" />
           </div>
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-blue-500 tracking-tight">HireMind</h1>
         </div>

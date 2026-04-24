@@ -32,7 +32,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center">
-              <img src="/logo.svg" alt="HireMind" className="w-10 h-10 object-contain" />
+              <img src="/logo.png" alt="HireMind Logo" className="w-20 h-20 object-contain drop-shadow-xl" />
             </div>
             <span className="text-2xl font-black text-white tracking-tight">HireMind</span>
           </div>
@@ -147,7 +147,7 @@ const LandingPage = () => {
             <div className="flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-                      <img src="/logo.svg" alt="HireMind" className="w-8 h-8 object-contain" />
+                      <img src="/logo.png" alt="HireMind" className="w-8 h-8 object-contain" />
                     </div>
                     <span className="text-xl font-black text-white tracking-tight">HireMind</span>
                 </div>

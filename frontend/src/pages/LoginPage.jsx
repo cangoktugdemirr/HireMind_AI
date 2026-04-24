@@ -45,7 +45,7 @@ export default function LoginPage() {
       <div className="glass-panel-dark w-full max-w-md p-10 relative z-10 border border-white/5 shadow-2xl">
         <div className="flex flex-col items-center mb-8">
           <div className="w-16 h-16 flex items-center justify-center mb-4">
-            <img src="/logo.svg" alt="HireMind Logo" className="w-20 h-20 object-contain brightness-0 invert drop-shadow-xl" />
+            <img src="/logo.png" alt="HireMind Logo" className="w-24 h-24 object-contain drop-shadow-2xl" />
           </div>
           <h1 className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400 tracking-tight">HireMind</h1>
           <p className="text-slate-400 text-sm mt-3 font-medium px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-full flex items-center gap-2">
